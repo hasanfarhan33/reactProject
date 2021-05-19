@@ -1,10 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
+import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 export default function App() {  
   return (
     <View style={styles.background}>
+      <Text style={styles.paragraph}>
+          BAU Market
+      </Text>
+
       <TouchableOpacity onPress={() => {/*Do something here*/}}>
         <View style={styles.productsButtonContainer}> 
           <Text style={styles.productsButtonText}>
@@ -13,7 +17,7 @@ export default function App() {
         </View>
 
       </TouchableOpacity>
-{/* Categories Button is here */}
+      {/* Categories Button is here */}
       <TouchableOpacity onPress={() => {/*Do something here*/}}>
         <View style={styles.categoriesButtonContainer}> 
           <Text style={styles.categoriesButtonText}>
@@ -30,6 +34,15 @@ export default function App() {
           </Text>
         </View>
       </TouchableOpacity>
+
+      {/* About Button is here */}
+      <TouchableOpacity onPress={() => {/*Do something here*/}}>
+        <View style={styles.aboutButtonContainer}> 
+          <Text style={styles.aboutButtonText}>
+            About
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -42,8 +55,15 @@ const styles = StyleSheet.create({
     paddingVertical: 250,  
     paddingHorizontal: 20, 
     flex: 1, 
-    
-    
+  },
+
+  // Title
+  paragraph: {
+    margin: 10,
+    fontSize: 36,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "white",
   },
 
   // Products Button
@@ -51,7 +71,7 @@ const styles = StyleSheet.create({
   {
     backgroundColor: "#333232",
     borderRadius: 50,
-    paddingVertical: 20,
+    paddingVertical: 15,
     paddingHorizontal: 22,
     elevation: 5,
   }, 
@@ -61,7 +81,7 @@ const styles = StyleSheet.create({
     fontSize: 40, 
     textAlign: "center", 
     fontFamily: 'Roboto',
-    fontStyle: 'italic', 
+    fontStyle: 'bold', 
   }, 
 
   // Categories Button
@@ -69,7 +89,7 @@ const styles = StyleSheet.create({
   {
     backgroundColor: "#333232",
     borderRadius: 50,
-    paddingVertical: 20,
+    paddingVertical: 15,
     paddingHorizontal: 22, 
     elevation: 5,
   }, 
@@ -80,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 40, 
     textAlign: "center",
     fontFamily: 'Roboto',
-    fontStyle: 'italic',  
+    fontStyle: 'bold',  
   },
 
   // Orders Button
@@ -88,7 +108,7 @@ const styles = StyleSheet.create({
   {
     backgroundColor: "#333232",
     borderRadius: 50,
-    paddingVertical: 20,
+    paddingVertical: 15,
     paddingHorizontal: 22,
     elevation: 5, 
 
@@ -99,6 +119,25 @@ const styles = StyleSheet.create({
     fontSize: 40, 
     textAlign: "center",
     fontFamily: 'Roboto',
-    fontStyle: 'italic', 
-  }
+    fontStyle: 'bold', 
+  },
+
+    // About Button
+  aboutButtonContainer:
+    {
+      backgroundColor: "#333232",
+      borderRadius: 50,
+      paddingVertical: 15,
+      paddingHorizontal: 22,
+      elevation: 5, 
+  
+    }, 
+    aboutButtonText:
+    {
+      color: "white", 
+      fontSize: 40, 
+      textAlign: "center",
+      fontFamily: 'Roboto',
+      fontStyle: 'bold', 
+    }
 });
