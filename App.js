@@ -1,143 +1,36 @@
-import {StatusBar} from 'expo-status-bar';
-import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React, { useState, Component} from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { NativeRouter, Switch, Route } from "react-router-native";
 
-export default function App() {  
-  return (
-    <View style={styles.background}>
-      <Text style={styles.paragraph}>
-          BAU Market
-      </Text>
+import Home from "./Home";
+import About from "./About";
+import Products from "./Products"; 
 
-      <TouchableOpacity onPress={() => {/*Do something here*/}}>
-        <View style={styles.productsButtonContainer}> 
-          <Text style={styles.productsButtonText}>
-            Products
-          </Text>
+export default class App extends Component {
+  render() {
+    return (
+      <NativeRouter>
+        <View style={styles.background}>
+          <Switch>
+            <Route exact path="/" component={Home}></Route>
+            <Route exact path="/about" component={About}></Route>
+            <Route exact path="/products" component={Products}></Route>
+          </Switch>
         </View>
-
-      </TouchableOpacity>
-      {/* Categories Button is here */}
-      <TouchableOpacity onPress={() => {/*Do something here*/}}>
-        <View style={styles.categoriesButtonContainer}> 
-          <Text style={styles.categoriesButtonText}>
-            Categories
-          </Text>
-        </View>
-      </TouchableOpacity>
-
-      {/* Orders Button is here */}
-      <TouchableOpacity onPress={() => {/*Do something here*/}}>
-        <View style={styles.ordersButtonContainer}> 
-          <Text style={styles.ordersButtonText}>
-            Orders
-          </Text>
-        </View>
-      </TouchableOpacity>
-
-      {/* About Button is here */}
-      <TouchableOpacity onPress={() => {/*Do something here*/}}>
-        <View style={styles.aboutButtonContainer}> 
-          <Text style={styles.aboutButtonText}>
-            About
-          </Text>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
+      </NativeRouter>
+    );
+  }
 }
 
+// Design stuff here
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: '#F7B2AD',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',  
-    paddingVertical: 250,  
-    paddingHorizontal: 20, 
-    flex: 1, 
+    backgroundColor: "#F7B2AD",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    paddingVertical: 250,
+    paddingHorizontal: 20,
+    flex: 1,
   },
-
-  // Title
-  paragraph: {
-    margin: 10,
-    fontSize: 36,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "white",
-  },
-
-  // Products Button
-  productsButtonContainer: 
-  {
-    backgroundColor: "#333232",
-    borderRadius: 50,
-    paddingVertical: 15,
-    paddingHorizontal: 22,
-    elevation: 5,
-  }, 
-  productsButtonText: 
-  {
-    color: "white", 
-    fontSize: 40, 
-    textAlign: "center", 
-    fontFamily: 'Roboto',
-    fontStyle: 'bold', 
-  }, 
-
-  // Categories Button
-  categoriesButtonContainer: 
-  {
-    backgroundColor: "#333232",
-    borderRadius: 50,
-    paddingVertical: 15,
-    paddingHorizontal: 22, 
-    elevation: 5,
-  }, 
-
-  categoriesButtonText:
-  {
-    color: "white", 
-    fontSize: 40, 
-    textAlign: "center",
-    fontFamily: 'Roboto',
-    fontStyle: 'bold',  
-  },
-
-  // Orders Button
-  ordersButtonContainer:
-  {
-    backgroundColor: "#333232",
-    borderRadius: 50,
-    paddingVertical: 15,
-    paddingHorizontal: 22,
-    elevation: 5, 
-
-  }, 
-  ordersButtonText:
-  {
-    color: "white", 
-    fontSize: 40, 
-    textAlign: "center",
-    fontFamily: 'Roboto',
-    fontStyle: 'bold', 
-  },
-
-    // About Button
-  aboutButtonContainer:
-    {
-      backgroundColor: "#333232",
-      borderRadius: 50,
-      paddingVertical: 15,
-      paddingHorizontal: 22,
-      elevation: 5, 
-  
-    }, 
-    aboutButtonText:
-    {
-      color: "white", 
-      fontSize: 40, 
-      textAlign: "center",
-      fontFamily: 'Roboto',
-      fontStyle: 'bold', 
-    }
 });
