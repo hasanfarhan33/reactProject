@@ -5,6 +5,7 @@ import { NativeRouter, Switch, Route } from "react-router-native";
 
 import Home from "./Home";
 import About from "./About";
+import Products from "./Products"; 
 
 export default class App extends Component {
   render() {
@@ -14,6 +15,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/about" component={About}></Route>
+            <Route exact path="/products" component={Products}></Route>
           </Switch>
         </View>
       </NativeRouter>

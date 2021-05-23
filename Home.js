@@ -1,55 +1,52 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Header } from "react-native";
 import { NativeRouter, Switch, Route } from "react-router-native";
 
 export default ({ history }) => (
-    <View style={styles.background}>
-        <Text style={styles.paragraph}>BAU Market</Text>
+  <View style={styles.background}>
+    <Text style={styles.paragraph}>BAU Market</Text>
 
-        <TouchableOpacity
-          onPress={() => {
-            /*Do something here*/
-          }}
-        >
-          <View style={styles.productsButtonContainer}>
-            <Text style={styles.productsButtonText}>Products</Text>
-          </View>
-        </TouchableOpacity>
-        {/* Categories Button is here */}
-        <TouchableOpacity
-          onPress={() => {
-            /*Do something here*/
-          }}
-        >
-          <View style={styles.categoriesButtonContainer}>
-            <Text style={styles.categoriesButtonText}>Categories</Text>
-          </View>
-        </TouchableOpacity>
-
-        {/* Orders Button is here */}
-        <TouchableOpacity
-          onPress={() => {
-            /*Do something here*/
-          }}
-        >
-          <View style={styles.ordersButtonContainer}>
-            <Text style={styles.ordersButtonText}>Orders</Text>
-          </View>
-        </TouchableOpacity>
-
-        {/* About Button is here */}
-        <TouchableOpacity
-          onPress={() => {
-            history.push("/about")
-          }}
-        >
-          <View style={styles.aboutButtonContainer}>
-            <Text style={styles.aboutButtonText}>About</Text>
-          </View>
-        </TouchableOpacity>
+    {/* Products Button is here */}
+    <TouchableOpacity
+      onPress={() => {
+        history.push("/products");
+      }}
+    >
+      <View style={styles.productsButtonContainer}>
+        <Text style={styles.productsButtonText}>Products</Text>
       </View>
+    </TouchableOpacity>
 
+    {/* Categories Button is here */}
+    <TouchableOpacity onPress={() => {}}>
+      <View style={styles.categoriesButtonContainer}>
+        <Text style={styles.categoriesButtonText}>Categories</Text>
+      </View>
+    </TouchableOpacity>
+
+    {/* Orders Button is here */}
+    <TouchableOpacity
+      onPress={() => {
+        /*Do something here*/
+      }}
+    >
+      <View style={styles.ordersButtonContainer}>
+        <Text style={styles.ordersButtonText}>Orders</Text>
+      </View>
+    </TouchableOpacity>
+
+    {/* About Button is here */}
+    <TouchableOpacity
+      onPress={() => {
+        history.push("/about");
+      }}
+    >
+      <View style={styles.aboutButtonContainer}>
+        <Text style={styles.aboutButtonText}>About</Text>
+      </View>
+    </TouchableOpacity>
+  </View>
 );
 
 // Designing stuff here
