@@ -5,7 +5,9 @@ import { NativeRouter, Switch, Route } from "react-router-native";
 
 import Home from "./Home";
 import About from "./About";
-import Products from "./Products"; 
+import Products from "./Products";
+import Categories from "./Categories";
+import Orders from "./Orders";
 
 export default class App extends Component {
   render() {
@@ -16,6 +18,8 @@ export default class App extends Component {
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/about" component={About}></Route>
             <Route exact path="/products" component={Products}></Route>
+            <Route exact path="/orders" component={Orders}></Route>
+            <Route exact path="/categories" component={Categories}></Route>
           </Switch>
         </View>
       </NativeRouter>
@@ -29,8 +33,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F7B2AD",
     flexDirection: "column",
     justifyContent: "space-evenly",
-    paddingVertical: 250,
-    paddingHorizontal: 20,
+    paddingVertical: "20%",
+    paddingHorizontal: "5%",
     flex: 1,
   },
 });

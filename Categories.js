@@ -5,8 +5,8 @@ import { NativeRouter, Switch, Route } from "react-router-native";
 
 export default ({ history }) => (
   <View style ={styles.background}>
-    <Text style = {styles.about}>About</Text>
-    <Text style = {styles.info}>This app was developed by Farhan Hasan (1721647) and Ege Öz (1730762)</Text>
+    <Text style = {styles.categories}>Categories</Text>
+    <Text style = {styles.info}>Category list lies here</Text>
     <TouchableOpacity onPress={() => {history.push("/")}}>
         <View style = {styles.backButtonContainer}>
             <Text style = {styles.back}>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  about:{
+  categories:{
       textAlign: "center", 
       fontSize: 46,
       fontWeight: "bold",

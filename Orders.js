@@ -5,8 +5,8 @@ import { NativeRouter, Switch, Route } from "react-router-native";
 
 export default ({ history }) => (
   <View style ={styles.background}>
-    <Text style = {styles.about}>About</Text>
-    <Text style = {styles.info}>This app was developed by Farhan Hasan (1721647) and Ege Öz (1730762)</Text>
+    <Text style = {styles.orders}>Orders</Text>
+    <Text style = {styles.info}>Here lies my orders</Text>
     <TouchableOpacity onPress={() => {history.push("/")}}>
         <View style = {styles.backButtonContainer}>
             <Text style = {styles.back}>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  about:{
+  orders:{
       textAlign: "center", 
       fontSize: 46,
       fontWeight: "bold",

@@ -19,7 +19,11 @@ export default ({ history }) => (
     </TouchableOpacity>
 
     {/* Categories Button is here */}
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity 
+      onPress={() => {
+        history.push("/categories");
+      }}>
+
       <View style={styles.categoriesButtonContainer}>
         <Text style={styles.categoriesButtonText}>Categories</Text>
       </View>
@@ -28,7 +32,7 @@ export default ({ history }) => (
     {/* Orders Button is here */}
     <TouchableOpacity
       onPress={() => {
-        /*Do something here*/
+        history.push("/orders");
       }}
     >
       <View style={styles.ordersButtonContainer}>
