@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 
   // Title
   paragraph: {
-    marginTop: -80,
+    marginTop: "-30%",
     fontSize: 46,
     fontWeight: "bold",
     textAlign: "center",
