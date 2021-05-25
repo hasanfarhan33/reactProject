@@ -47,7 +47,7 @@ export default ({ history }) => (
       onPress={() => {}}
     >
       <View style={styles.buttonContainer}>
-        <Text style={styles.back}>Delete Item</Text>
+        <Text style={styles.button}>Delete Item</Text>
       </View>
     </TouchableOpacity>
 
@@ -57,7 +57,7 @@ export default ({ history }) => (
       }}
     >
       <View style={styles.buttonContainer}>
-        <Text style={styles.back}>Back to Homepage</Text>
+        <Text style={styles.button}>Back to Homepage</Text>
       </View>
     </TouchableOpacity>
   </View>
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
 
   product: {
-      marginTop: "-30%",
+      marginTop: "-20%",
       fontSize: 46, 
       fontWeight: "bold", 
       fontStyle: "italic", 
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 
-  back: {
+  button: {
     color: "white",
     fontSize: 25,
     textAlign: "center",

@@ -6,7 +6,7 @@ import { NativeRouter, Switch, Route } from "react-router-native";
 export default ({ history }) => (
   <View style ={styles.background}>
     <Text style = {styles.about}>About</Text>
-    <Text style = {styles.info}>This app was developed by Farhan Hasan (1721647) and Ege Öz (1730762)</Text>
+    <Text style = {styles.info}>This app was developed by Farhan Hasan (1721647) and Ege Öz (1730762) for COP4468 Cross Platform App Development Class.</Text>
     <TouchableOpacity onPress={() => {history.push("/")}}>
         <View style = {styles.backButtonContainer}>
             <Text style = {styles.back}>
