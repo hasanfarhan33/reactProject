@@ -43,18 +43,13 @@ export default ({ history }) => (
     />
   </SafeAreaView>
 
-    <TouchableOpacity
-      onPress={() => {}}
-    >
+    <TouchableOpacity onPress={() => {history.push("/productdetails")}}>
       <View style={styles.buttonContainer}>
-        <Text style={styles.button}>Delete Item</Text>
+        <Text style={styles.button}>Product Details</Text>
       </View>
     </TouchableOpacity>
 
-    <TouchableOpacity
-      onPress={() => {
-        history.push("/");
-      }}
+    <TouchableOpacity onPress={() => {history.push("/")}}
     >
       <View style={styles.buttonContainer}>
         <Text style={styles.button}>Back to Homepage</Text>

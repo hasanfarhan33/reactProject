@@ -39,8 +39,7 @@ export default ({ history }) => (
       keyExtractor = {item => item.id}
     />
     </SafeAreaView>
-
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={() => {history.push("/addcategory")}}>
         <View style = {styles.buttonContainer}>
             <Text style = {styles.button}>
                 Add Category

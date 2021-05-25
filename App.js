@@ -6,7 +6,9 @@ import { NativeRouter, Switch, Route } from "react-router-native";
 import Home from "./Home";
 import About from "./About";
 import Products from "./Products";
+import ProductDetails from "./ProductDetails";
 import Categories from "./Categories";
+import AddCategory from "./AddCategory";
 import Orders from "./Orders";
 
 export default class App extends Component {
@@ -18,8 +20,10 @@ export default class App extends Component {
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/about" component={About}></Route>
             <Route exact path="/products" component={Products}></Route>
+            <Route exact path="/productdetails" component={ProductDetails}></Route>
             <Route exact path="/orders" component={Orders}></Route>
             <Route exact path="/categories" component={Categories}></Route>
+            <Route exact path="/addcategory" component={AddCategory}></Route>
           </Switch>
         </View>
       </NativeRouter>
