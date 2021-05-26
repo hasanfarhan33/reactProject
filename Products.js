@@ -19,6 +19,26 @@ const productsList = [
     title: "Phone",
     type: "Electronics",
   },
+  {
+    id: "4", 
+    title: "Chair", 
+    type: "Furniture", 
+  }, 
+  {
+    id: "5", 
+    title: "Bed", 
+    type: "Furniture", 
+  },
+  {
+    id: "6", 
+    title: "Bottle", 
+    type: "Utilities", 
+  }, 
+  {
+    id: "7", 
+    title: "Whiteboard", 
+    type: "Utilities", 
+  }
 ];
 
 const Row = ({ title }) => (
@@ -27,8 +47,13 @@ const Row = ({ title }) => (
   </View>
 );
 
+// Style this later
 const renderItem = ({ item }) => (
-  <Row title={item.title} />
+  <View>
+    {/* I changed this from ROW to VIEW so we can add multiple stuff to the list */}
+    <Text>{item.id}</Text>
+    <Text>{item.title}</Text>
+  </View>
 );
 
 export default ({ history }) => (

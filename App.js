@@ -12,6 +12,36 @@ import AddCategory from "./AddCategory";
 import Orders from "./Orders";
 
 export default class App extends Component {
+
+  // ACCESSING THE ITEMS FROM THE API HERE 
+  constructor(props){
+    super(props)
+    this.state = {
+      isLoading: true, 
+      products: [],
+    }
+  }
+
+  componentDidMount() {
+    fetch("https://northwind.vercel.app/api/products")
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({ 
+        isLoading: false, 
+        products: responseJson
+      })
+    })
+  }
+
+  _renderItem = ({item, index}) => {
+    return(
+      <View>
+        <Text>{item.name}</Text>
+      </View>
+    )
+  }
+
+// THE FLATLIST IS ON THE PRODUCTS.JS SO HOW THE HELL DO I TAKE THIS DATA AND PUT IT IN THE FLATLIST THERE?
   render() {
     return (
       <NativeRouter>

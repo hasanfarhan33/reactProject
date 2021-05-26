@@ -3,46 +3,11 @@ import React, { useState, Component } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, FlatList , SafeAreaView} from "react-native";
 import { NativeRouter, Switch, Route } from "react-router-native";
 
-const productsList = [
-  {
-    id: "1",
-    title: "Laptop",
-    type: "Electronics",
-  },
-  {
-    id: "2",
-    title: "Apple",
-    type: "Food",
-  },
-  {
-    id: "3",
-    title: "Phone",
-    type: "Electronics",
-  },
-];
-
-const Row = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.itemTitle}>{title}</Text>
-  </View>
-);
-
-const renderItem = ({ item }) => (
-  <Row title={item.title} />
-);
 
 export default ({ history }) => (
   <View style={styles.background}>
     <Text style={styles.product}>Product Details</Text>
-
-  <SafeAreaView style={styles.container}>
-    <FlatList
-      data = {productsList}
-      renderItem = {renderItem}
-      keyExtractor = {item => item.id}
-    />
-  </SafeAreaView>
-
+    
     <TouchableOpacity
       onPress={() => {}}
     >
