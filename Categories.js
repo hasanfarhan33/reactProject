@@ -1,77 +1,77 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, Component } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Button, FlatList , SafeAreaView } from "react-native";
+import React, { useState, Component, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Button,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
+
+import {ListItem, Icon} from 'react-native-elements'; 
 import { NativeRouter, Switch, Route } from "react-router-native";
 
-const categoryList = [
-  {
-    id: "1",
-    title: "Electronics",
-  },
-  {
-    id: "2",
-    title: "Food",
-  },
-  {
-    id: "3",
-    title: "Real Estate",
-  },
-];
+export default function Categories({ history }) {
 
-const Row = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.itemTitle}>{title}</Text>
-  </View>
-);
 
-const renderItem = ({ item }) => (
-  <Row title={item.title} />
-);
+ 
 
-export default ({ history }) => (
-  <View style ={styles.background}>
-    <Text style = {styles.categories}>Categories</Text>
+  const [category, setCategory] = useState([])
 
-    <SafeAreaView style={styles.container}>
-    <FlatList
-      data = {categoryList}
-      renderItem = {renderItem}
-      keyExtractor = {item => item.id}
-    />
-    </SafeAreaView>
-    <TouchableOpacity onPress={() => {history.push("/addcategory")}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Add Category
-            </Text>
+  useEffect(() => {
+    fetch("https://northwind.vercel.app/api/categories")
+    .then((res) => res.json())
+    .then((data) => {
+      setCategory(data);
+      // console.log(data);
+    })
+
+  }, [])
+
+  return (
+
+    <View style={styles.background}>
+      <Text style={styles.categories}>Categories</Text>
+
+      <View>
+        {
+          category.map((item) => (
+            <ListItem key = {item.id}>
+              <ListItem.Content>
+                <ListItem.Title>{item.name}</ListItem.Title>
+                <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
+                <Icon name ='delete'></Icon>
+              </ListItem.Content>
+            </ListItem>
+
+          ))
+        }
+      </View>
+
+      <TouchableOpacity
+        onPress={() => {
+          history.push("/addcategory");
+        }}
+      >
+        <View style={styles.buttonContainer}>
+          <Text style={styles.button}>Add Category</Text>
         </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => {}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Update Categories
-            </Text>
+      <TouchableOpacity
+        onPress={() => {
+          history.push("/");
+        }}
+      >
+        <View style={styles.buttonContainer}>
+          <Text style={styles.button}>Back to Homepage</Text>
         </View>
-    </TouchableOpacity>
-
-    <TouchableOpacity onPress={() => {}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Delete Category
-            </Text>
-        </View>
-    </TouchableOpacity>
-
-    <TouchableOpacity onPress={() => {history.push("/")}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Back to Homepage
-            </Text>
-        </View>
-    </TouchableOpacity>
-  </View>
-);
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   background: {
@@ -101,32 +101,32 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: "center",
     fontFamily: "Roboto",
-    fontWeight: "bold",    
+    fontWeight: "bold",
   },
 
-  categories:{
-    textAlign: "center", 
+  categories: {
+    textAlign: "center",
     marginTop: "-20%",
     fontSize: 46,
     fontWeight: "bold",
-    fontStyle: "italic", 
+    fontStyle: "italic",
     fontFamily: "Roboto",
-    color: "black",    
-  }, 
+    color: "black",
+  },
 
   info: {
-    textAlign: "center", 
-    fontSize: 20, 
-    fontWeight: "bold", 
-    color: "black", 
-    fontStyle: "italic", 
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "black",
+    fontStyle: "italic",
   },
 
   buttonContainer: {
     backgroundColor: "#333232",
     borderRadius: 30,
     paddingVertical: 15,
-    marginHorizontal: 40, 
+    marginHorizontal: 40,
     marginVertical: "2%",
     elevation: 5,
   },
@@ -140,4 +140,9 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 
+  categoryListContainer: {
+    color: "pink", 
+    paddingTop: "10%", 
+  }
 });
+
