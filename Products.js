@@ -1,87 +1,76 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, Component } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, FlatList , SafeAreaView} from "react-native";
+import React, { useState, Component, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
+
+import {ListItem, Icon} from 'react-native-elements'; 
+
 import { NativeRouter, Switch, Route } from "react-router-native";
 
-const productsList = [
-  {
-    id: "1",
-    title: "Laptop",
-    type: "Electronics",
-  },
-  {
-    id: "2",
-    title: "Apple",
-    type: "Food",
-  },
-  {
-    id: "3",
-    title: "Phone",
-    type: "Electronics",
-  },
-  {
-    id: "4", 
-    title: "Chair", 
-    type: "Furniture", 
-  }, 
-  {
-    id: "5", 
-    title: "Bed", 
-    type: "Furniture", 
-  },
-  {
-    id: "6", 
-    title: "Bottle", 
-    type: "Utilities", 
-  }, 
-  {
-    id: "7", 
-    title: "Whiteboard", 
-    type: "Utilities", 
-  }
-];
+export default function Products({ history }) {
 
-const Row = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.itemTitle}>{title}</Text>
-  </View>
-);
+  //Fetching the data from the api here
+  const [products, setProducts] = useState([])
 
-// Style this later
-const renderItem = ({ item }) => (
-  <View>
-    {/* I changed this from ROW to VIEW so we can add multiple stuff to the list */}
-    <Text>{item.id}</Text>
-    <Text>{item.title}</Text>
-  </View>
-);
+  useEffect(() => {
+    fetch("https://northwind.vercel.app/api/products")
+    .then((res) => res.json())
+    .then((data) => {
+      setProducts(data);
+      // console.log(data);
+    })
 
-export default ({ history }) => (
-  <View style={styles.background}>
-    <Text style={styles.product}>Products</Text>
+  }, [])
 
-  <SafeAreaView style={styles.container}>
-    <FlatList
-      data = {productsList}
-      renderItem = {renderItem}
-      keyExtractor = {item => item.id}
-    />
-  </SafeAreaView>
 
-    <TouchableOpacity onPress={() => {history.push("/productdetails")}}>
-      <View style={styles.buttonContainer}>
-        <Text style={styles.button}>Product Details</Text>
+
+  return (
+    <View style={styles.background}>
+      <Text style={styles.product}>Products</Text>
+
+      <View>
+        {
+          products.map((item) => (
+            <ListItem key = {item.id} bottomDivider>
+              <ListItem.Content>
+                <ListItem.Title>{item.name}</ListItem.Title>
+                <ListItem.Subtitle>{item.quantityPerUnit}</ListItem.Subtitle>
+                <Icon name ='delete'></Icon>
+              </ListItem.Content>
+            </ListItem>
+
+          ))
+        }
       </View>
-    </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => {history.push("/")}}
-    >
-      <View style={styles.buttonContainer}>
-        <Text style={styles.button}>Back to Homepage</Text>
-      </View>
-    </TouchableOpacity>
-  </View>
-);
+      <TouchableOpacity
+        onPress={() => {
+          history.push("/productdetails");
+        }}
+      >
+        <View style={styles.buttonContainer}>
+          <Text style={styles.button}>Product Details</Text>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        onPress={() => {
+          history.push("/");
+        }}
+      >
+        <View style={styles.buttonContainer}>
+          <Text style={styles.button}>Back to Homepage</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   background: {
@@ -111,23 +100,23 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: "center",
     fontFamily: "Roboto",
-    fontWeight: "bold",    
+    fontWeight: "bold",
   },
 
   product: {
-      marginTop: "-20%",
-      fontSize: 46, 
-      fontWeight: "bold", 
-      fontStyle: "italic", 
-      color: "black", 
-      textAlign: "center", 
+    marginTop: "-20%",
+    fontSize: 46,
+    fontWeight: "bold",
+    fontStyle: "italic",
+    color: "black",
+    textAlign: "center",
   },
 
   buttonContainer: {
     backgroundColor: "#333232",
     borderRadius: 30,
     paddingVertical: 15,
-    marginHorizontal: 40, 
+    marginHorizontal: 40,
     marginVertical: "2%",
     elevation: 5,
   },
