@@ -1,53 +1,35 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Button,
-  FlatList,
-  SafeAreaView,
-} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View, Button, FlatList, SafeAreaView,} from "react-native";
 
-import {ListItem, Icon} from 'react-native-elements'; 
+import { ListItem, IconButton, Icon} from "react-native-elements";
 import { NativeRouter, Switch, Route } from "react-router-native";
 
 export default function Categories({ history }) {
-
-
- 
-
-  const [category, setCategory] = useState([])
+  
+  const [category, setCategory] = useState([]);
 
   useEffect(() => {
     fetch("https://northwind.vercel.app/api/categories")
-    .then((res) => res.json())
-    .then((data) => {
-      setCategory(data);
-      // console.log(data);
-    })
-
-  }, [])
+      .then((res) => res.json())
+      .then((data) => {
+        setCategory(data);
+        // console.log(data);
+      });
+  }, []);
 
   return (
-
     <View style={styles.background}>
       <Text style={styles.categories}>Categories</Text>
 
-      <View>
-        {
-          category.map((item) => (
-            <ListItem key = {item.id}>
-              <ListItem.Content>
-                <ListItem.Title>{item.name}</ListItem.Title>
-                <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
-                <Icon name ='delete'></Icon>
-              </ListItem.Content>
-            </ListItem>
+      <View style={styles.listContainer}>
+        <FlatList
+        data = {category}
+        renderItem = {({item}) => (
+          <Text>{item.name}</Text>
+        )}>
 
-          ))
-        }
+        </FlatList>
       </View>
 
       <TouchableOpacity
@@ -75,17 +57,13 @@ export default function Categories({ history }) {
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: "#F7B2AD",
+    // backgroundColor: "#F7B2AD",
+    backgroundColor: "blue", 
     flexDirection: "column",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     paddingVertical: "5%",
     paddingHorizontal: "5%",
     flex: 1,
-  },
-
-  container: {
-    flex: 1,
-    marginTop: 10,
   },
 
   item: {
@@ -114,6 +92,19 @@ const styles = StyleSheet.create({
     color: "black",
   },
 
+  listContainer: {
+    // flex: 1,
+    // flexDirection: "column",
+    // justifyContent: "space-between",
+    // marginTop: "-40%",
+    // maxHeight: 12,
+    // overflow: "scroll",
+    backgroundColor: "red",  
+     
+     
+  },
+
+
   info: {
     textAlign: "center",
     fontSize: 20,
@@ -141,8 +132,7 @@ const styles = StyleSheet.create({
   },
 
   categoryListContainer: {
-    color: "pink", 
-    paddingTop: "10%", 
-  }
+    color: "pink",
+    paddingTop: "10%",
+  },
 });
-
