@@ -4,6 +4,7 @@
 - NodeJS
 - npm
 - react-native
+- react-router-native
 - expo
 
 #### Steps for Debian based systems
