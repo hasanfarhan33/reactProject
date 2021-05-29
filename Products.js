@@ -23,33 +23,35 @@ export default function Products({ history }) {
     .then((res) => res.json())
     .then((data) => {
       setProducts(data);
-      // console.log(data);
     })
-
   }, [])
-
-
 
   return (
     <View style={styles.background}>
       <Text style={styles.product}>Products</Text>
 
-      <View>
-        {
-          products.map((item) => (
-            <ListItem key = {item.id} bottomDivider>
-              <ListItem.Content>
-                <ListItem.Title>{item.name}</ListItem.Title>
-                <ListItem.Subtitle>{item.quantityPerUnit}</ListItem.Subtitle>
-                <Icon name ='delete'></Icon>
-              </ListItem.Content>
-            </ListItem>
-
-          ))
-        }
+      <View style={styles.listContainer}>
+        <FlatList
+        data = {products}
+        renderItem = {({item}) => (
+          <ListItem key = {item.id} bottomDivider>
+          <ListItem.Content>
+            <View style={styles.listButtons}>
+              <ListItem.Title>{item.name}</ListItem.Title>
+              <Icon name = "delete"></Icon>
+              <Icon name = "info"></Icon>
+              {/* TODO: ADD ICONBUTTON INSTEAD */}
+            </View>
+            <ListItem.Subtitle><Text style={styles.label}>Quantity Per Unit:</Text> {item.quantityPerUnit}</ListItem.Subtitle>
+            <ListItem.Subtitle><Text style={styles.label}>In Stock:</Text> {item.unitsInStock}</ListItem.Subtitle>
+            <ListItem.Subtitle><Text style={styles.label}>Unit Price:</Text> {item.unitPrice}</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+        )}>
+        </FlatList>
       </View>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           history.push("/productdetails");
         }}
@@ -57,7 +59,7 @@ export default function Products({ history }) {
         <View style={styles.buttonContainer}>
           <Text style={styles.button}>Product Details</Text>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity
         onPress={() => {
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  container: {
+  listContainer: {
     flex: 1,
     marginTop: 10,
   },
@@ -95,12 +97,23 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
 
+  label: {
+    fontWeight: "bold",
+  },
+
   itemTitle: {
     color: "white",
     fontSize: 25,
     textAlign: "center",
     fontFamily: "Roboto",
     fontWeight: "bold",
+  },
+
+  listButtons: {
+    flex: 1, 
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    flexGrow: 0
   },
 
   product: {
@@ -118,6 +131,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 40,
     marginVertical: "2%",
+    marginBottom: "-10%",
     elevation: 5,
   },
 
