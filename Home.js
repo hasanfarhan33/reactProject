@@ -61,17 +61,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     paddingVertical: 5,
     paddingHorizontal: 20,
-    flex: 1,
+    // flex: 1,
   },
 
   // Title
   paragraph: {
-    marginTop: "-30%",
+    marginTop: "-50%",
     fontSize: 46,
     fontWeight: "bold",
     textAlign: "center",
     color: "black",
     fontStyle: "italic",
+    marginBottom: "10%",
   },
 
   // Products Button
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 22,
     elevation: 5,
+    marginBottom: "10%", 
   },
   productsButtonText: {
     color: "white",
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 22,
     elevation: 5,
+    marginBottom: "10%",
   },
 
   categoriesButtonText: {
@@ -116,6 +119,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 22,
     elevation: 5,
+    marginBottom: "10%",
   },
   ordersButtonText: {
     color: "white",
