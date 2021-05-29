@@ -6,7 +6,7 @@
 - react-native
 - expo
 
-#### Steps of Debian based systems
+#### Steps for Debian based systems
 `sudo apt update && sudo apt install -y git npm nodejs`
 
 `sudo npm install --global expo-cli react-router-native`
