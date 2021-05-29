@@ -7,14 +7,13 @@ import { NativeRouter, Switch, Route } from "react-router-native";
 
 export default function Categories({ history }) {
   
-  const [category, setCategory] = useState([]);
+  const [categories, setCategory] = useState([]);
 
   useEffect(() => {
     fetch("https://northwind.vercel.app/api/categories")
       .then((res) => res.json())
       .then((data) => {
         setCategory(data);
-        // console.log(data);
       });
   }, []);
 
@@ -22,13 +21,36 @@ export default function Categories({ history }) {
     <View style={styles.background}>
       <Text style={styles.categories}>Categories</Text>
 
-      <View style={styles.listContainer}>
+      {/* <View style={styles.listContainer}>
         <FlatList
         data = {category}
         renderItem = {({item}) => (
           <Text>{item.name}</Text>
         )}>
 
+        </FlatList>
+      </View> */}
+
+      <View style={styles.listContainer}>
+        <FlatList
+        data = {categories}
+        renderItem = {({item}) => (
+          <ListItem key = {item.id} bottomDivider>
+          <ListItem.Content>
+            <View style={styles.listButtons}>
+              <ListItem.Title>{item.name}</ListItem.Title>
+              {/* ICON BUTTON TEST -- ERROR*/}
+              {/* <IconButton 
+                icon = "edit" 
+                onPress={() => console.log('Pressed')}
+              /> */}
+            <Icon name ="edit"></Icon>
+            <Icon name ="delete"></Icon>
+            </View>
+            <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+        )}>
         </FlatList>
       </View>
 
@@ -58,6 +80,7 @@ export default function Categories({ history }) {
 const styles = StyleSheet.create({
   background: {
     // backgroundColor: "#F7B2AD",
+    borderRadius: 10,
     backgroundColor: "blue", 
     flexDirection: "column",
     justifyContent: "space-between",
@@ -72,6 +95,17 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+  },
+
+  label: {
+    fontWeight: "bold",
+  },
+
+  listButtons: {
+    flex: 1, 
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    flexGrow: 0
   },
 
   itemTitle: {
@@ -100,8 +134,6 @@ const styles = StyleSheet.create({
     // maxHeight: 12,
     // overflow: "scroll",
     backgroundColor: "red",  
-     
-     
   },
 
 
@@ -119,6 +151,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 40,
     marginVertical: "2%",
+    marginBottom: "-10%",
     elevation: 5,
   },
 

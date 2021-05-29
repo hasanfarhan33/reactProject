@@ -1,48 +1,39 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, Component } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Button, FlatList , SafeAreaView } from "react-native";
-import { NativeRouter, Switch, Route } from "react-router-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, TouchableOpacity, View, Button, FlatList } from "react-native";
+import { ListItem } from 'react-native-elements'; 
 
-const ordersList = [
-  {
-    id: "1",
-    title: "Laptop",
-    type: "Electronics",
-  },
-  {
-    id: "2",
-    title: "Apple",
-    type: "Food",
-  },
-  {
-    id: "3",
-    title: "Phone",
-    type: "Electronics",
-  },
-];
+export default function Orders({ history }) {
+  
+  const [orders, setOrders] = useState([]);
 
-const Row = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.itemTitle}>{title}</Text>
-  </View>
-);
+  useEffect(() => {
+    fetch("https://northwind.vercel.app/api/orders")
+      .then((res) => res.json())
+      .then((data) => {
+        setOrders(data);
+      });
+  }, []);
 
-const renderItem = ({ item }) => (
-  <Row title={item.title} />
-);
-
-
-export default ({ history }) => (
+  return (
   <View style ={styles.background}>
     <Text style = {styles.orders}>Orders</Text>
 
-    <SafeAreaView style={styles.container}>
-    <FlatList
-      data = {ordersList}
-      renderItem = {renderItem}
-      keyExtractor = {item => item.id}
-    />
-    </SafeAreaView>
+      <View style={styles.listContainer}>
+        <FlatList
+        data = {orders}
+        renderItem = {({item}) => (
+          <ListItem key = {item.id} bottomDivider>
+          <ListItem.Content>
+            <ListItem.Title>{item.customerId}</ListItem.Title>
+            <ListItem.Subtitle><Text style={styles.label}>Ship Name:</Text> {item.shipName}</ListItem.Subtitle>
+            <ListItem.Subtitle><Text style={styles.label}>Country:</Text> {item.shipAddress.country}</ListItem.Subtitle>
+            <ListItem.Subtitle><Text style={styles.label}>Order Date:</Text> {item.orderDate}</ListItem.Subtitle>
+            <ListItem.Subtitle><Text style={styles.label}>Shipped Date:</Text>  {item.shippedDate}</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+        )}>
+        </FlatList>
+      </View>
 
     <TouchableOpacity onPress={() => {history.push("/")}}>
         <View style = {styles.buttonContainer}>
@@ -52,7 +43,8 @@ export default ({ history }) => (
         </View>
     </TouchableOpacity>
   </View>
-);
+  );
+}
 
 const styles = StyleSheet.create({
   background: {
@@ -64,7 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  container: {
+  listContainer: {
     flex: 1,
     marginTop: 10,
   },
@@ -75,6 +67,10 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+  },
+
+  label: {
+    fontWeight: "bold",
   },
 
   itemTitle: {
@@ -109,6 +105,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 40, 
     marginVertical: "2%",
+    marginBottom: "-10%",
     elevation: 5,
   },
 
