@@ -1,12 +1,19 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component, useEffect } from "react";
-import {StyleSheet, Text, TouchableOpacity, View, Button, FlatList, SafeAreaView,} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Button,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 
-import { ListItem, IconButton, Icon} from "react-native-elements";
+import { ListItem, IconButton, Icon } from "react-native-elements";
 import { NativeRouter, Switch, Route } from "react-router-native";
 
 export default function Categories({ history }) {
-  
   const [categories, setCategory] = useState([]);
 
   useEffect(() => {
@@ -21,37 +28,40 @@ export default function Categories({ history }) {
     <View style={styles.background}>
       <Text style={styles.categories}>Categories</Text>
 
-      {/* <View style={styles.listContainer}>
+      <View>
         <FlatList
-        data = {category}
-        renderItem = {({item}) => (
-          <Text>{item.name}</Text>
-        )}>
-
-        </FlatList>
-      </View> */}
-
-      <View style={styles.listContainer}>
-        <FlatList
-        data = {categories}
-        renderItem = {({item}) => (
-          <ListItem key = {item.id} bottomDivider>
-          <ListItem.Content>
-            <View style={styles.listButtons}>
-              <ListItem.Title>{item.name}</ListItem.Title>
-              {/* ICON BUTTON TEST -- ERROR*/}
-              {/* <IconButton 
-                icon = "edit" 
-                onPress={() => console.log('Pressed')}
-              /> */}
-            <Icon name ="edit"></Icon>
-            <Icon name ="delete"></Icon>
-            </View>
-            <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
-          </ListItem.Content>
-        </ListItem>
-        )}>
-        </FlatList>
+        style = {{backgroundColor: "#F7B2AD", maxHeight: "80%", marginTop: "15%", marginHorizontal: "-5%"}}
+          data={categories}
+          renderItem={({ item }) => (
+            <ListItem key={item.id} 
+            bottomDivider
+            containerStyle = {{backgroundColor: "#333232", borderRadius: 20, marginVertical: "2.5%"}}
+            >
+              <ListItem.Content style={styles.itemContainer}>
+                <View style = {styles.categoryBox}>
+                  <View style={styles.categoryInfo}>
+                    <ListItem.Title style={styles.categoryName}>
+                      {item.name}
+                    </ListItem.Title>
+                    <ListItem.Subtitle style={styles.categoryDescription}>
+                      {item.description}
+                    </ListItem.Subtitle>
+                  </View>
+                  <View style={styles.listButtons}>
+                    <Icon 
+                    name="edit"
+                    color = "#cca199"
+                    ></Icon>
+                    <Icon 
+                    name="delete"
+                    color = "#cca199"
+                    ></Icon>
+                  </View>
+                </View>
+              </ListItem.Content>
+            </ListItem>
+          )}
+        ></FlatList>
       </View>
 
       <TouchableOpacity
@@ -79,9 +89,9 @@ export default function Categories({ history }) {
 
 const styles = StyleSheet.create({
   background: {
-    // backgroundColor: "#F7B2AD",
+    backgroundColor: "#F7B2AD",
     borderRadius: 10,
-    backgroundColor: "blue", 
+    // backgroundColor: "blue",
     flexDirection: "column",
     justifyContent: "space-between",
     paddingVertical: "5%",
@@ -102,10 +112,12 @@ const styles = StyleSheet.create({
   },
 
   listButtons: {
-    flex: 1, 
-    flexDirection: "row", 
-    flexWrap: "wrap", 
-    flexGrow: 0
+    // flex: 1,
+    flexDirection: "row",
+    // flexWrap: "wrap",
+    // flexGrow: 0,
+    // backgroundColor: "green",
+     
   },
 
   itemTitle: {
@@ -133,8 +145,47 @@ const styles = StyleSheet.create({
     // marginTop: "-40%",
     // maxHeight: 12,
     // overflow: "scroll",
-    backgroundColor: "red",  
+    backgroundColor: "red",
   },
+
+  itemContainer: {
+    flex: 1,
+    // backgroundColor: "red",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  categoryName: {
+    // paddingRight: 20,
+    color: "white", 
+    fontWeight: "bold", 
+    fontStyle: "italic", 
+    fontSize: 25, 
+    fontFamily: "Roboto", 
+  },
+
+  categoryDescription: {
+    color: "grey", 
+    fontSize: 15, 
+    fontFamily: "Roboto",
+
+  },
+
+  categoryInfo: {
+    // backgroundColor: "orange",
+    flexDirection: "column",
+    maxWidth: "70%", 
+  },
+
+ categoryBox: {
+   flex: 1, 
+  //  backgroundColor: "pink", 
+   flexDirection: "row",
+   justifyContent: "space-between",
+   alignItems:"center",   
+    
+ },
 
 
   info: {
@@ -148,10 +199,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: "#333232",
     borderRadius: 30,
-    paddingVertical: 15,
-    marginHorizontal: 40,
+    paddingVertical: "5%",
+    marginHorizontal: "10%",
     marginVertical: "2%",
-    marginBottom: "-10%",
+    marginBottom: "5%",
     elevation: 5,
   },
 
@@ -165,7 +216,7 @@ const styles = StyleSheet.create({
   },
 
   categoryListContainer: {
-    color: "pink",
+    // color: "pink",
     paddingTop: "10%",
   },
 });
