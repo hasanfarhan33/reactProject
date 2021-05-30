@@ -50,6 +50,11 @@ export default function Products({ history }) {
             >
               <ListItem.Content>
                 <View style={styles.productBox}>
+                <TouchableOpacity
+                  onPress={() => {
+                  history.push("/productdetails");
+                }}
+                >
                   <View style={styles.productInfo}>
                     <ListItem.Title>{item.name}</ListItem.Title>
                     <ListItem.Subtitle>
@@ -65,7 +70,8 @@ export default function Products({ history }) {
                       {item.unitPrice}
                     </ListItem.Subtitle>
                   </View>
-
+                  </TouchableOpacity>
+                  
                   {/* TODO: ADD ICONBUTTON INSTEAD */}
                   <View styles={styles.iconList}>
                     <Icon 

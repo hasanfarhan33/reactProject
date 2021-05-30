@@ -1,22 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Button, FlatList , SafeAreaView } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, TextInput} from "react-native";
 import { NativeRouter, Switch, Route } from "react-router-native";
-
-const categoryList = [
-  {
-    id: "1",
-    title: "Electronics",
-  },
-  {
-    id: "2",
-    title: "Food",
-  },
-  {
-    id: "3",
-    title: "Real Estate",
-  },
-];
 
 const Row = ({ title }) => (
   <View style={styles.item}>
@@ -28,17 +13,53 @@ const renderItem = ({ item }) => (
   <Row title={item.title} />
 );
 
-export default ({ history }) => (
+function addCategory (categoryName, categoryDetails, categoryID) {
+  useEffect(() => {
+    // POST request for Categories API
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ id: categoryID, name: categoryName, description: categoryDetails})
+    };
+    fetch("https://northwind.vercel.app/api/categories", requestOptions)
+        .then(response => response.json())
+        .then(data => setPostId(data.id));
+
+// empty dependency array means this effect will only run once (like componentDidMount in classes)
+}, []);
+}
+
+export default function AddCategory({ history }) {
+  const [text, setText] = useState("");
+
+  return (
   <View style ={styles.background}>
     <Text style = {styles.categories}>Add new Category</Text>
 
-    <SafeAreaView style={styles.container}>
-    <FlatList
-      data = {categoryList}
-      renderItem = {renderItem}
-      keyExtractor = {item => item.id}
-    />
-    </SafeAreaView>
+    <View style={styles.formRow}>
+    <Text>Category ID: </Text>
+    <TextInput
+      placeholder="Enter the ID..."
+      onChangeText={text => setText(text)}
+      defaultValue={text}></TextInput>
+    </View>
+
+    <View style={styles.formRow}>
+    <Text>Category Name: </Text>
+    <TextInput        
+      placeholder="Enter the category name..."
+      onChangeText={text => setText(text)}
+      defaultValue={text}></TextInput>
+    </View>
+
+    <View style={styles.formRow}>
+    <Text>Category Details: </Text>
+    <TextInput        
+      placeholder="Enter the category details..."
+      onChangeText={text => setText(text)}
+      defaultValue={text}></TextInput>
+    </View>
+
     <TouchableOpacity onPress={() => {}}>
         <View style = {styles.buttonContainer}>
             <Text style = {styles.button}>
@@ -47,31 +68,16 @@ export default ({ history }) => (
         </View>
     </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={() => {history.push("/categories")}}>
         <View style = {styles.buttonContainer}>
             <Text style = {styles.button}>
-                Update Categories
-            </Text>
-        </View>
-    </TouchableOpacity>
-
-    <TouchableOpacity onPress={() => {}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Delete Category
-            </Text>
-        </View>
-    </TouchableOpacity>
-
-    <TouchableOpacity onPress={() => {history.push("/")}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Back to Homepage
+                Cancel
             </Text>
         </View>
     </TouchableOpacity>
   </View>
 );
+}
 
 const styles = StyleSheet.create({
   background: {
@@ -102,6 +108,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Roboto",
     fontWeight: "bold",    
+  },
+
+  formRow: {
+    // flex: 1,
+    flexDirection: "row",
   },
 
   categories:{
