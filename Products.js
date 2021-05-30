@@ -9,22 +9,21 @@ import {
   SafeAreaView,
 } from "react-native";
 
-import {ListItem, Icon} from 'react-native-elements'; 
+import { ListItem, Icon } from "react-native-elements";
 
 import { NativeRouter, Switch, Route } from "react-router-native";
 
 export default function Products({ history }) {
-
   //Fetching the data from the api here
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetch("https://northwind.vercel.app/api/products")
-    .then((res) => res.json())
-    .then((data) => {
-      setProducts(data);
-    })
-  }, [])
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+      });
+  }, []);
 
   return (
     <View style={styles.background}>
@@ -32,34 +31,60 @@ export default function Products({ history }) {
 
       <View style={styles.listContainer}>
         <FlatList
-        data = {products}
-        renderItem = {({item}) => (
-          <ListItem key = {item.id} bottomDivider>
-          <ListItem.Content>
-            <View style={styles.listButtons}>
-              <ListItem.Title>{item.name}</ListItem.Title>
-              <Icon name = "delete"></Icon>
-              <Icon name = "info"></Icon>
-              {/* TODO: ADD ICONBUTTON INSTEAD */}
-            </View>
-            <ListItem.Subtitle><Text style={styles.label}>Quantity Per Unit:</Text> {item.quantityPerUnit}</ListItem.Subtitle>
-            <ListItem.Subtitle><Text style={styles.label}>In Stock:</Text> {item.unitsInStock}</ListItem.Subtitle>
-            <ListItem.Subtitle><Text style={styles.label}>Unit Price:</Text> {item.unitPrice}</ListItem.Subtitle>
-          </ListItem.Content>
-        </ListItem>
-        )}>
-        </FlatList>
-      </View>
+          style={{
+            backgroundColor: "#F7B2AD",
+            maxHeight: "80%",
+            marginTop: "15%",
+            marginHorizontal: "-5%",
+          }}
+          data={products}
+          renderItem={({ item }) => (
+            <ListItem
+              key={item.id}
+              bottomDivider
+              containerStyle={{
+                backgroundColor: "#333232",
+                borderRadius: 20,
+                marginVertical: "2.5%",
+              }}
+            >
+              <ListItem.Content>
+                <View style={styles.productBox}>
+                  <View style={styles.productInfo}>
+                    <ListItem.Title>{item.name}</ListItem.Title>
+                    <ListItem.Subtitle>
+                      <Text style={styles.label}>Quantity Per Unit:</Text>{" "}
+                      {item.quantityPerUnit}
+                    </ListItem.Subtitle>
+                    <ListItem.Subtitle>
+                      <Text style={styles.label}>In Stock:</Text>{" "}
+                      {item.unitsInStock}
+                    </ListItem.Subtitle>
+                    <ListItem.Subtitle>
+                      <Text style={styles.label}>Unit Price:</Text>{" "}
+                      {item.unitPrice}
+                    </ListItem.Subtitle>
+                  </View>
 
-      {/* <TouchableOpacity
-        onPress={() => {
-          history.push("/productdetails");
-        }}
-      >
-        <View style={styles.buttonContainer}>
-          <Text style={styles.button}>Product Details</Text>
-        </View>
-      </TouchableOpacity> */}
+                  {/* TODO: ADD ICONBUTTON INSTEAD */}
+                  <View styles={styles.iconList}>
+                    <Icon 
+                    name="delete"
+                    color = "#cca199"
+                    ></Icon>
+                    <Icon name="info"
+                    color = "#cca199"
+                    ></Icon>
+                  </View>
+
+                  
+
+                </View>
+              </ListItem.Content>
+            </ListItem>
+          )}
+        ></FlatList>
+      </View>
 
       <TouchableOpacity
         onPress={() => {
@@ -84,11 +109,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  listContainer: {
-    flex: 1,
-    marginTop: 10,
-  },
-
   item: {
     backgroundColor: "#333232",
     fontSize: 20,
@@ -99,6 +119,7 @@ const styles = StyleSheet.create({
 
   label: {
     fontWeight: "bold",
+    color: "white",
   },
 
   itemTitle: {
@@ -109,11 +130,27 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  listButtons: {
-    flex: 1, 
-    flexDirection: "row", 
-    flexWrap: "wrap", 
-    flexGrow: 0
+  productBox: {
+    // flex: 1,
+     backgroundColor: "pink",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  productInfo: {
+    backgroundColor: "orange",
+    flexDirection: "column",
+    maxWidth: "70%", 
+  },
+
+  iconList: {
+    // flex: 1,
+    flexDirection: "row",
+    // flexWrap: "wrap",
+    // flexGrow: 0,
+    backgroundColor: "green",
+
   },
 
   product: {
