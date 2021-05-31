@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, Component } from "react";
+import React, { useState, Component, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, TextInput} from "react-native";
 import { NativeRouter, Switch, Route } from "react-router-native";
 
@@ -25,48 +25,67 @@ function addCategory (categoryName, categoryDetails, categoryID) {
         .then(response => response.json())
         .then(data => setPostId(data.id));
 
-// empty dependency array means this effect will only run once (like componentDidMount in classes)
 }, []);
 }
 
 export default function AddCategory({ history }) {
   const [text, setText] = useState("");
+  state = {
+    id: "",
+    description: "",
+    name: ""
+ }
+
+ handleID = (text) => {
+    this.setState({ id: text })
+ }
+ handleName = (text) => {
+    this.setState({ name: text })
+ }
+ handleDetails = (text) => {
+   this.setState({ description: text})
+ }
+
+addCategory = (categoryID, categoryDescription, categoryName) => {
+  useEffect(() => {
+    // POST request for Categories API
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ id: categoryID, description: categoryDescription, name: categoryName })
+    };
+    fetch("https://northwind.vercel.app/api/categories", requestOptions)
+        .then(response => response.json())
+        .then(data => setPostId(data.id));
+
+}, []); }
 
   return (
   <View style ={styles.background}>
     <Text style = {styles.categories}>Add new Category</Text>
 
-    <View style={styles.formRow}>
-    <Text>Category ID: </Text>
-    <TextInput
-      placeholder="Enter the ID..."
-      onChangeText={text => setText(text)}
-      defaultValue={text}></TextInput>
-    </View>
+            <TextInput style = {styles.input}
+               placeholder = "Enter the ID..."
+               autoCapitalize = "none"
+               onChangeText = {this.handleID}/>
+            
+            <TextInput style = {styles.input}
+               placeholder = "Enter the category name..."
+               autoCapitalize = "none"
+               onChangeText = {this.handleName}/>
 
-    <View style={styles.formRow}>
-    <Text>Category Name: </Text>
-    <TextInput        
-      placeholder="Enter the category name..."
-      onChangeText={text => setText(text)}
-      defaultValue={text}></TextInput>
-    </View>
+            <TextInput style = {styles.input}
+               placeholder = "Enter the category details..."
+               autoCapitalize = "none"
+               onChangeText = {this.handleDetails}/>        
 
-    <View style={styles.formRow}>
-    <Text>Category Details: </Text>
-    <TextInput        
-      placeholder="Enter the category details..."
-      onChangeText={text => setText(text)}
-      defaultValue={text}></TextInput>
-    </View>
-
-    <TouchableOpacity onPress={() => {}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Add Category
-            </Text>
-        </View>
-    </TouchableOpacity>
+            <TouchableOpacity
+              style = {styles.submitButton}
+              onPress = {() => this.addCategory(this.state.id, this.state.description, this.state.name)}>
+              <View style = {styles.buttonContainer}>
+                <Text style = {styles.button}>Submit</Text>
+              </View>
+            </TouchableOpacity>
 
     <TouchableOpacity onPress={() => {history.push("/categories")}}>
         <View style = {styles.buttonContainer}>
