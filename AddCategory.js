@@ -29,7 +29,6 @@ function addCategory (categoryName, categoryDetails, categoryID) {
 }
 
 export default function AddCategory({ history }) {
-  const [text, setText] = useState("");
   state = {
     id: "",
     description: "",
