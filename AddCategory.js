@@ -1,22 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, Component } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Button, FlatList , SafeAreaView } from "react-native";
+import React, { useState, Component, useEffect } from "react";
+import { StyleSheet, Text, TouchableOpacity, View, TextInput} from "react-native";
 import { NativeRouter, Switch, Route } from "react-router-native";
-
-const categoryList = [
-  {
-    id: "1",
-    title: "Electronics",
-  },
-  {
-    id: "2",
-    title: "Food",
-  },
-  {
-    id: "3",
-    title: "Real Estate",
-  },
-];
 
 const Row = ({ title }) => (
   <View style={styles.item}>
@@ -28,50 +13,89 @@ const renderItem = ({ item }) => (
   <Row title={item.title} />
 );
 
-export default ({ history }) => (
+function addCategory (categoryName, categoryDetails, categoryID) {
+  useEffect(() => {
+    // POST request for Categories API
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ id: categoryID, name: categoryName, description: categoryDetails})
+    };
+    fetch("https://northwind.vercel.app/api/categories", requestOptions)
+        .then(response => response.json())
+        .then(data => setPostId(data.id));
+
+}, []);
+}
+
+export default function AddCategory({ history }) {
+  state = {
+    id: "",
+    description: "",
+    name: ""
+ }
+
+ handleID = (text) => {
+    this.setState({ id: text })
+ }
+ handleName = (text) => {
+    this.setState({ name: text })
+ }
+ handleDetails = (text) => {
+   this.setState({ description: text})
+ }
+
+addCategory = (categoryID, categoryDescription, categoryName) => {
+  useEffect(() => {
+    // POST request for Categories API
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ id: categoryID, description: categoryDescription, name: categoryName })
+    };
+    fetch("https://northwind.vercel.app/api/categories", requestOptions)
+        .then(response => response.json())
+        .then(data => setPostId(data.id));
+
+}, []); }
+
+  return (
   <View style ={styles.background}>
     <Text style = {styles.categories}>Add new Category</Text>
 
-    <SafeAreaView style={styles.container}>
-    <FlatList
-      data = {categoryList}
-      renderItem = {renderItem}
-      keyExtractor = {item => item.id}
-    />
-    </SafeAreaView>
-    <TouchableOpacity onPress={() => {}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Add Category
-            </Text>
-        </View>
-    </TouchableOpacity>
+            <TextInput style = {styles.input}
+               placeholder = "Enter the ID..."
+               autoCapitalize = "none"
+               onChangeText = {this.handleID}/>
+            
+            <TextInput style = {styles.input}
+               placeholder = "Enter the category name..."
+               autoCapitalize = "none"
+               onChangeText = {this.handleName}/>
 
-    <TouchableOpacity onPress={() => {}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Update Categories
-            </Text>
-        </View>
-    </TouchableOpacity>
+            <TextInput style = {styles.input}
+               placeholder = "Enter the category details..."
+               autoCapitalize = "none"
+               onChangeText = {this.handleDetails}/>        
 
-    <TouchableOpacity onPress={() => {}}>
-        <View style = {styles.buttonContainer}>
-            <Text style = {styles.button}>
-                Delete Category
-            </Text>
-        </View>
-    </TouchableOpacity>
+            <TouchableOpacity
+              style = {styles.submitButton}
+              onPress = {() => this.addCategory(this.state.id, this.state.description, this.state.name)}>
+              <View style = {styles.buttonContainer}>
+                <Text style = {styles.button}>Submit</Text>
+              </View>
+            </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => {history.push("/")}}>
+    <TouchableOpacity onPress={() => {history.push("/categories")}}>
         <View style = {styles.buttonContainer}>
             <Text style = {styles.button}>
-                Back to Homepage
+                Cancel
             </Text>
         </View>
     </TouchableOpacity>
   </View>
 );
+}
 
 const styles = StyleSheet.create({
   background: {
@@ -102,6 +126,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Roboto",
     fontWeight: "bold",    
+  },
+
+  formRow: {
+    // flex: 1,
+    flexDirection: "row",
   },
 
   categories:{
