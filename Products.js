@@ -29,7 +29,7 @@ export default function Products({ history }) {
     <View style={styles.background}>
       <Text style={styles.product}>Products</Text>
 
-      <View style={styles.listContainer}>
+      <View>
         <FlatList
           style={{
             backgroundColor: "#F7B2AD",
@@ -48,43 +48,32 @@ export default function Products({ history }) {
                 marginVertical: "2.5%",
               }}
             >
-              <ListItem.Content>
+              <ListItem.Content style={styles.itemContainer}>
                 <View style={styles.productBox}>
-                <TouchableOpacity
-                  onPress={() => {
-                  history.push("/productdetails");
-                }}
-                >
                   <View style={styles.productInfo}>
-                    <ListItem.Title>{item.name}</ListItem.Title>
-                    <ListItem.Subtitle>
-                      <Text style={styles.label}>Quantity Per Unit:</Text>{" "}
-                      {item.quantityPerUnit}
-                    </ListItem.Subtitle>
-                    <ListItem.Subtitle>
-                      <Text style={styles.label}>In Stock:</Text>{" "}
-                      {item.unitsInStock}
-                    </ListItem.Subtitle>
-                    <ListItem.Subtitle>
-                      <Text style={styles.label}>Unit Price:</Text>{" "}
-                      {item.unitPrice}
-                    </ListItem.Subtitle>
+                    <TouchableOpacity
+                      onPress={() => {
+                        history.push("/productdetails");
+                      }}
+                    >
+                      <ListItem.Title style={styles.itemTitle}>
+                        {item.name}
+                      </ListItem.Title>
+                      <ListItem.Subtitle style={styles.itemSubtitle}>
+                        <Text style={styles.label}>Unit Price :</Text>{" "}
+                        <Text style={styles.label}>{item.unitPrice}</Text>
+                      </ListItem.Subtitle>
+                      <ListItem.Subtitle>
+                        <Text style={styles.label}>Quantity : </Text>{" "}
+                        <Text style={styles.label}>{item.quantityPerUnit}</Text>
+                      </ListItem.Subtitle>
+                    </TouchableOpacity>
                   </View>
-                  </TouchableOpacity>
-                  
+
                   {/* TODO: ADD ICONBUTTON INSTEAD */}
                   <View styles={styles.iconList}>
-                    <Icon 
-                    name="delete"
-                    color = "#cca199"
-                    ></Icon>
-                    <Icon name="info"
-                    color = "#cca199"
-                    ></Icon>
+                    <Icon name="delete" color="#cca199"></Icon>
                   </View>
-
-                  
-
                 </View>
               </ListItem.Content>
             </ListItem>
@@ -126,28 +115,44 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: "bold",
     color: "white",
+    fontSize: 15,
   },
 
   itemTitle: {
     color: "white",
     fontSize: 25,
-    textAlign: "center",
+    // textAlign: "center",
     fontFamily: "Roboto",
     fontWeight: "bold",
+    fontStyle: "italic",
+  },
+
+  itemContainer: {
+    flex: 1,
+    // backgroundColor: "red",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  itemSubtitle: {
+    color: "white",
+    fontSize: 10,
+    paddingTop: "5%",
   },
 
   productBox: {
-    // flex: 1,
-     backgroundColor: "pink",
+    flex: 1,
+    //  backgroundColor: "blue",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
 
   productInfo: {
-    backgroundColor: "orange",
+    // backgroundColor: "orange",
     flexDirection: "column",
-    maxWidth: "70%", 
+    maxWidth: "80%",
   },
 
   iconList: {
@@ -156,7 +161,6 @@ const styles = StyleSheet.create({
     // flexWrap: "wrap",
     // flexGrow: 0,
     backgroundColor: "green",
-
   },
 
   product: {

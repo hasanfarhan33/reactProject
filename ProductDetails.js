@@ -28,12 +28,7 @@ export default function ProductDetails({ history }) {
 
   return (
     <View style={styles.background}>
-      <Text style={styles.product}>Products</Text>
-
-      renderItem={({ item }) => (
-        <Text>item.name</Text>
-      )}
-
+      <Text>The error is here</Text>
       <TouchableOpacity
         onPress={() => {
           history.push("/");
@@ -80,7 +75,7 @@ const styles = StyleSheet.create({
 
   productBox: {
     // flex: 1,
-     backgroundColor: "pink",
+    backgroundColor: "pink",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -89,7 +84,7 @@ const styles = StyleSheet.create({
   productInfo: {
     backgroundColor: "orange",
     flexDirection: "column",
-    maxWidth: "70%", 
+    maxWidth: "70%",
   },
 
   iconList: {
@@ -98,7 +93,6 @@ const styles = StyleSheet.create({
     // flexWrap: "wrap",
     // flexGrow: 0,
     backgroundColor: "green",
-
   },
 
   product: {
