@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
 
   categoryDescription: {
-    color: "grey", 
+    color: "#e6e6e6", 
     fontSize: 15, 
     fontFamily: "Roboto",
 

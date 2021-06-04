@@ -20,15 +20,18 @@ export default function Orders({ history }) {
 
       <View style={styles.listContainer}>
         <FlatList
+        style = {{backgroundColor: "#F7B2AD", maxHeight: "80%", marginTop: "15%", marginHorizontal: "-5%"}}
         data = {orders}
         renderItem = {({item}) => (
-          <ListItem key = {item.id} bottomDivider>
+          <ListItem 
+          key = {item.id} bottomDivider
+          containerStyle = {{backgroundColor: "#333232", borderRadius: 20, marginVertical: "2.5%"}}>
           <ListItem.Content>
-            <ListItem.Title>{item.customerId}</ListItem.Title>
-            <ListItem.Subtitle><Text style={styles.label}>Ship Name:</Text> {item.shipName}</ListItem.Subtitle>
-            <ListItem.Subtitle><Text style={styles.label}>Country:</Text> {item.shipAddress.country}</ListItem.Subtitle>
-            <ListItem.Subtitle><Text style={styles.label}>Order Date:</Text> {item.orderDate}</ListItem.Subtitle>
-            <ListItem.Subtitle><Text style={styles.label}>Shipped Date:</Text>  {item.shippedDate}</ListItem.Subtitle>
+            <ListItem.Title style = {styles.orderName}>{item.customerId}</ListItem.Title>
+            <ListItem.Subtitle style = {styles.label}><Text style={styles.label}>Ship Name:</Text> {item.shipName}</ListItem.Subtitle>
+            <ListItem.Subtitle style = {styles.label}><Text style={styles.label}>Country:</Text> {item.shipAddress.country}</ListItem.Subtitle>
+            <ListItem.Subtitle style = {styles.label}><Text style={styles.label}>Order Date:</Text> {item.orderDate}</ListItem.Subtitle>
+            <ListItem.Subtitle style = {styles.label}><Text style={styles.label}>Shipped Date:</Text>  {item.shippedDate}</ListItem.Subtitle>
           </ListItem.Content>
         </ListItem>
         )}>
@@ -56,6 +59,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  orderName: {
+     // paddingRight: 20,
+     color: "white", 
+     fontWeight: "bold", 
+     fontStyle: "italic", 
+     fontSize: 25, 
+     fontFamily: "Roboto", 
+  },
+
   listContainer: {
     flex: 1,
     marginTop: 10,
@@ -70,7 +82,9 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    fontWeight: "bold",
+    color: "#e6e6e6", 
+    fontSize: 15, 
+    fontFamily: "Roboto",
   },
 
   itemTitle: {
