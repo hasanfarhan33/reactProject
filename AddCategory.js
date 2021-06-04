@@ -1,61 +1,32 @@
 import React, { useState, Component, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, TextInput} from "react-native";
 
-const Row = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.itemTitle}>{title}</Text>
-  </View>
-);
-
-const renderItem = ({ item }) => (
-  <Row title={item.title} />
-);
-
-function addCategory (categoryName, categoryDetails, categoryID) {
-  useEffect(() => {
-    // POST request for Categories API
-    const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json"},
-        body: JSON.stringify({ id: categoryID, name: categoryName, description: categoryDetails})
-    };
-    fetch("https://northwind.vercel.app/api/categories", requestOptions)
-        .then(response => response.json())
-        .then(data => setPostId(data.id));
-
-}, []);
-}
-
 export default function AddCategory({ history }) {
-  state = {
-    id: "",
-    description: "",
-    name: ""
- }
+  const [id, setID] =useState(1);
+  const [name, setName] =useState(1);
+  const [description, setDescription] =useState(1);
 
- handleID = (text) => {
-    setState({ id: text });
- }
- handleName = (text) => {
-    setState({ name: text });
- }
- handleDetails = (text) => {
-   setState({ description: text});
- }
+  const [bid, bsetID] =useState(1);
+  const [bname, bsetName] =useState(1);
+  const [bdescription, bsetDescription] =useState(1);
 
-addCategory = (categoryID, categoryDescription, categoryName) => {
+  const handleButton = () => {
+    bsetID(id);
+    bsetDescription(description);
+    bsetName(name);
+  }
+
   useEffect(() => {
     // POST request for Categories API
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json"},
-        body: JSON.stringify({ id: categoryID, description: categoryDescription, name: categoryName })
+        body: JSON.stringify({ id: bid, description: bdescription, name: bname })
     };
     fetch("https://northwind.vercel.app/api/categories", requestOptions)
         .then(response => response.json())
-        .then(data => setPostId(data.id));
 
-}, []); }
+}, [bid,bdescription,bname]);
 
   return (
   <View style ={styles.background}>
@@ -64,21 +35,24 @@ addCategory = (categoryID, categoryDescription, categoryName) => {
             <TextInput style = {styles.input}
                placeholder = "Enter the ID..."
                autoCapitalize = "none"
-               onChangeText = {handleID}/>
+               value= {id}
+               onChange = {e => setID(e.target.value)}/>
             
             <TextInput style = {styles.input}
                placeholder = "Enter the category name..."
                autoCapitalize = "none"
-               onChangeText = {handleName}/>
+               value= {name}
+               onChange = {e => setName(e.target.value)}/>
 
             <TextInput style = {styles.input}
                placeholder = "Enter the category details..."
                autoCapitalize = "none"
-               onChangeText = {handleDetails}/>        
+               value= {description}
+               onChange = {e => setDescription(e.target.value)}/>     
 
             <TouchableOpacity
               style = {styles.submitButton}
-              onPress = {() => addCategory(state.id, state.description, state.name)}>
+              onPress = {handleButton}>
               <View style = {styles.buttonContainer}>
                 <Text style = {styles.button}>Submit</Text>
               </View>

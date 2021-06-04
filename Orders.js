@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Button, FlatList } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, FlatList } from "react-native";
 import { ListItem } from 'react-native-elements'; 
 
 export default function Orders({ history }) {

@@ -4,12 +4,10 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button,
   FlatList,
-  SafeAreaView,
 } from "react-native";
 
-import { ListItem, IconButton, Icon } from "react-native-elements";
+import { ListItem, Icon } from "react-native-elements";
 
 export default function Categories({ history }) {
   const [categories, setCategory] = useState([]);

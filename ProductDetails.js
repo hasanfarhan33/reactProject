@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   View,
   FlatList,
-  SafeAreaView,
 } from "react-native";
 
 import { ListItem, Icon } from "react-native-elements";

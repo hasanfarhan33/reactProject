@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
   FlatList,
-  SafeAreaView,
+  ToastAndroid,
 } from "react-native";
 
 import { ListItem, Icon } from "react-native-elements";
@@ -13,6 +13,7 @@ import { ListItem, Icon } from "react-native-elements";
 export default function Products({ history }) {
   //Fetching the data from the api here
   const [products, setProducts] = useState([]);
+  const [idForDeletion, setIdForDeletion] = useState(0);
 
   useEffect(() => {
     fetch("https://northwind.vercel.app/api/products")
@@ -23,12 +24,10 @@ export default function Products({ history }) {
   }, []);
 
 
-function deleteProduct(productID){
-    useEffect(() => {
-      fetch("https://northwind.vercel.app/api/products/"+productID, { method: "DELETE" })
-          .then(() => console.log("Deletion of product "+productID+ " is successful."));
-  
-  }, []); }
+  useEffect(() => {
+      fetch("https://northwind.vercel.app/api/products/"+idForDeletion, { method: "DELETE" })
+          .then(() => ToastAndroid.show(("Deletion of product "+idForDeletion+" is successful."),ToastAndroid.SHORT));
+  }, [idForDeletion]);
 
   return (
     <View style={styles.background}>
@@ -58,7 +57,6 @@ function deleteProduct(productID){
                   <View style={styles.productInfo}>
                     <TouchableOpacity
                       onPress={() => {
-                        // console.log("/productdetails/"+item.id);
                         history.push("/productdetails/"+item.id);
                       }}
                     >
@@ -77,7 +75,7 @@ function deleteProduct(productID){
                   </View>
 
                   <View styles={styles.iconList}>
-                    <TouchableOpacity onPress={() =>deleteProduct(item.id)}><Icon name="delete" color="#cca199"></Icon></TouchableOpacity>
+                    <TouchableOpacity onPress={e => setIdForDeletion(item.id)}><Icon name="delete" color="#cca199"></Icon></TouchableOpacity>
                   </View>
                 </View>
               </ListItem.Content>
