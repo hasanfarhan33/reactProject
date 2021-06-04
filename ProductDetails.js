@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, Component, useEffect } from "react";
 import {
   StyleSheet,
@@ -11,78 +10,103 @@ import {
 
 import { ListItem, Icon } from "react-native-elements";
 
-export default function ProductDetails({ history }) {
+export default function ProductDetails({ history, match }) {
+  let url="https://northwind.vercel.app/api/products/";
+  let prodID=JSON.stringify(match.params.id)
+  prodID=prodID.replace('"','');
+  prodID=prodID.replace('"','');
+  let productURL=url.concat(prodID);
+
   //Fetching the data from the api here
   const [product, setProduct] = useState([]);
-
   useEffect(() => {
-    fetch("https://northwind.vercel.app/api/products/1/")
+    fetch(productURL)
       .then((res) => res.json())
       .then((data) => {
-        setProduct(data);
-        console.log(data);
+        setProduct([data]);
       });
   }, []);
 
   return (
     <View style={styles.background}>
-      <Text>The error is here</Text>
+    <Text style={styles.product}>Product Details</Text>
 
-
-      <View>
-      <Text>The error is here1</Text>
-
-        <FlatList
-          data={product}
-          renderItem={({ item }) => (
-            <ListItem
-              key={item.id}
-              bottomDivider
-              containerStyle={{
-                backgroundColor: "#333232",
-                borderRadius: 20,
-                marginVertical: "2.5%",
-              }}
-            >
-                    <Text>The error is here</Text>
-
-              <ListItem.Content style={styles.itemContainer}>
-              <Text>The error is here3</Text>
-
-                <View style={styles.productBox}>
-                  <View style={styles.productInfo}>
-                  <Text>The error is here</Text>
-
-                      <ListItem.Title>
-                        {item.name}
-                      </ListItem.Title>
-                      <ListItem.Subtitle>
-                        <Text style={styles.label}>Unit Price :</Text>{" "}
-                        <Text style={styles.label}>{item.unitPrice}</Text>
-                      </ListItem.Subtitle>
-                      <ListItem.Subtitle>
-                        <Text style={styles.label}>Quantity : </Text>{" "}
-                        <Text style={styles.label}>{item.quantityPerUnit}</Text>
-                      </ListItem.Subtitle>
-                  </View>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-        ></FlatList>
-      </View>
-
-      <TouchableOpacity
-        onPress={() => {
-          history.push("/");
+    <View>
+      <FlatList
+        style={{
+          backgroundColor: "#F7B2AD",
+          maxHeight: "80%",
+          marginTop: "15%",
+          marginHorizontal: "-5%",
         }}
-      >
-        <View style={styles.buttonContainer}>
-          <Text style={styles.button}>Back to Homepage</Text>
-        </View>
-      </TouchableOpacity>
+        data={product}
+        renderItem={({ item }) => (
+          <ListItem
+            key={item.id}
+            bottomDivider
+            containerStyle={{
+              backgroundColor: "#333232",
+              borderRadius: 20,
+              marginVertical: "2.5%",
+            }}
+          >
+            <ListItem.Content style={styles.itemContainer}>
+              <View style={styles.productBox}>
+                <View style={styles.productInfo}>
+    
+                    <ListItem.Title style={styles.itemTitle}>
+                      {item.name}
+                    </ListItem.Title>
+                    <ListItem.Subtitle>
+                      <Text style={styles.label}>Quantity: </Text>{" "}
+                      <Text style={styles.label}>{item.quantityPerUnit}</Text>
+                    </ListItem.Subtitle>
+                    <ListItem.Subtitle>
+                      <Text style={styles.label}>Units in Stock : </Text>{" "}
+                      <Text style={styles.label}>{item.unitsInStock}</Text>
+                    </ListItem.Subtitle>
+                    <ListItem.Subtitle>
+                      <Text style={styles.label}>Units on Order: </Text>{" "}
+                      <Text style={styles.label}>{item.unitsOnOrder}</Text>
+                    </ListItem.Subtitle>
+                    <ListItem.Subtitle>
+                      <Text style={styles.label}>Reorder Level: </Text>{" "}
+                      <Text style={styles.label}>{item.reorderLevel}</Text>
+                    </ListItem.Subtitle>
+                    <ListItem.Subtitle>
+                      <Text style={styles.label}>Unit Price: </Text>{" "}
+                      <Text style={styles.label}>{item.unitPrice}</Text>
+                    </ListItem.Subtitle>
+
+                </View>
+              </View>
+            </ListItem.Content>
+          </ListItem>
+        )}
+      ></FlatList>
     </View>
-  );
+
+    <TouchableOpacity
+      onPress={() => {
+        history.push("/products");
+      }}
+    >
+      <View style={styles.buttonContainer}>
+        <Text style={styles.button}>Back to Products</Text>
+      </View>
+    </TouchableOpacity>
+
+    <TouchableOpacity
+      onPress={() => {
+        history.push("/");
+      }}
+    >
+      <View style={styles.buttonContainer}>
+        <Text style={styles.button}>Back to Homepage</Text>
+      </View>
+    </TouchableOpacity>
+  </View>
+);
 }
 
 const styles = StyleSheet.create({
@@ -106,28 +130,44 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: "bold",
     color: "white",
+    fontSize: 15,
   },
 
   itemTitle: {
     color: "white",
     fontSize: 25,
-    textAlign: "center",
+    // textAlign: "center",
     fontFamily: "Roboto",
     fontWeight: "bold",
+    fontStyle: "italic",
+  },
+
+  itemContainer: {
+    flex: 1,
+    // backgroundColor: "red",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  itemSubtitle: {
+    color: "white",
+    fontSize: 10,
+    paddingTop: "5%",
   },
 
   productBox: {
-    // flex: 1,
-    backgroundColor: "pink",
+    flex: 1,
+    //  backgroundColor: "blue",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
 
   productInfo: {
-    backgroundColor: "orange",
+    // backgroundColor: "orange",
     flexDirection: "column",
-    maxWidth: "70%",
+    maxWidth: "80%",
   },
 
   iconList: {
@@ -153,7 +193,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 40,
     marginVertical: "2%",
-    marginBottom: "10%",
+    marginBottom: "-10%",
     elevation: 5,
   },
 

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, Component, useEffect } from "react";
 import {
   StyleSheet,
@@ -11,7 +10,6 @@ import {
 } from "react-native";
 
 import { ListItem, IconButton, Icon } from "react-native-elements";
-import { NativeRouter, Switch, Route } from "react-router-native";
 
 export default function Categories({ history }) {
   const [categories, setCategory] = useState([]);

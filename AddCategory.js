@@ -1,7 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, Component, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, TextInput} from "react-native";
-import { NativeRouter, Switch, Route } from "react-router-native";
 
 const Row = ({ title }) => (
   <View style={styles.item}>

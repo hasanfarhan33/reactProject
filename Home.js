@@ -1,7 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Header } from "react-native";
-import { NativeRouter, Switch, Route } from "react-router-native";
 
 export default ({ history }) => (
   <View style={styles.background}>

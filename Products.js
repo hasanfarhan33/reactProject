@@ -19,7 +19,6 @@ export default function Products({ history }) {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-        console.log(data);
       });
   }, []);
 
@@ -59,7 +58,8 @@ function deleteProduct(productID){
                   <View style={styles.productInfo}>
                     <TouchableOpacity
                       onPress={() => {
-                        history.push("/productdetails");
+                        // console.log("/productdetails/"+item.id);
+                        history.push("/productdetails/"+item.id);
                       }}
                     >
                       <ListItem.Title style={styles.itemTitle}>

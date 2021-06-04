@@ -22,7 +22,7 @@ export default class App extends Component {
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/about" component={About}></Route>
             <Route exact path="/products" component={Products}></Route>
-            <Route exact path="/productdetails" component={ProductDetails}></Route>
+            <Route exact path="/productdetails/:id" component={ProductDetails}></Route>
             <Route exact path="/orders" component={Orders}></Route>
             <Route exact path="/categories" component={Categories}></Route>
             <Route exact path="/addcategory" component={AddCategory}></Route>
