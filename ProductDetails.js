@@ -127,9 +127,9 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    fontWeight: "bold",
-    color: "white",
-    fontSize: 15,
+    color: "#e6e6e6", 
+    fontSize: 15, 
+    fontFamily: "Roboto",
   },
 
   itemTitle: {
@@ -150,9 +150,9 @@ const styles = StyleSheet.create({
   },
 
   itemSubtitle: {
-    color: "white",
-    fontSize: 10,
-    paddingTop: "5%",
+    color: "#e6e6e6", 
+    fontSize: 15, 
+    fontFamily: "Roboto",
   },
 
   productBox: {
