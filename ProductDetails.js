@@ -11,14 +11,12 @@ import {
 
 import { ListItem, Icon } from "react-native-elements";
 
-import { NativeRouter, Switch, Route } from "react-router-native";
-
 export default function ProductDetails({ history }) {
   //Fetching the data from the api here
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch("https://northwind.vercel.app/api/products/10/")
+    fetch("https://northwind.vercel.app/api/products/1/")
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -29,6 +27,51 @@ export default function ProductDetails({ history }) {
   return (
     <View style={styles.background}>
       <Text>The error is here</Text>
+
+
+      <View>
+      <Text>The error is here1</Text>
+
+        <FlatList
+          data={product}
+          renderItem={({ item }) => (
+            <ListItem
+              key={item.id}
+              bottomDivider
+              containerStyle={{
+                backgroundColor: "#333232",
+                borderRadius: 20,
+                marginVertical: "2.5%",
+              }}
+            >
+                    <Text>The error is here</Text>
+
+              <ListItem.Content style={styles.itemContainer}>
+              <Text>The error is here3</Text>
+
+                <View style={styles.productBox}>
+                  <View style={styles.productInfo}>
+                  <Text>The error is here</Text>
+
+                      <ListItem.Title>
+                        {item.name}
+                      </ListItem.Title>
+                      <ListItem.Subtitle>
+                        <Text style={styles.label}>Unit Price :</Text>{" "}
+                        <Text style={styles.label}>{item.unitPrice}</Text>
+                      </ListItem.Subtitle>
+                      <ListItem.Subtitle>
+                        <Text style={styles.label}>Quantity : </Text>{" "}
+                        <Text style={styles.label}>{item.quantityPerUnit}</Text>
+                      </ListItem.Subtitle>
+                  </View>
+                </View>
+              </ListItem.Content>
+            </ListItem>
+          )}
+        ></FlatList>
+      </View>
+
       <TouchableOpacity
         onPress={() => {
           history.push("/");
@@ -110,7 +153,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 40,
     marginVertical: "2%",
-    marginBottom: "-10%",
+    marginBottom: "10%",
     elevation: 5,
   },
 

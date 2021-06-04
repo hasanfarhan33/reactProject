@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, Component, useEffect } from "react";
 import {
   StyleSheet,
@@ -11,8 +10,6 @@ import {
 
 import { ListItem, Icon } from "react-native-elements";
 
-import { NativeRouter, Switch, Route } from "react-router-native";
-
 export default function Products({ history }) {
   //Fetching the data from the api here
   const [products, setProducts] = useState([]);
@@ -22,8 +19,17 @@ export default function Products({ history }) {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
+        console.log(data);
       });
   }, []);
+
+
+function deleteProduct(productID){
+    useEffect(() => {
+      fetch("https://northwind.vercel.app/api/products/"+productID, { method: "DELETE" })
+          .then(() => console.log("Deletion of product "+productID+ " is successful."));
+  
+  }, []); }
 
   return (
     <View style={styles.background}>
@@ -70,9 +76,8 @@ export default function Products({ history }) {
                     </TouchableOpacity>
                   </View>
 
-                  {/* TODO: ADD ICONBUTTON INSTEAD */}
                   <View styles={styles.iconList}>
-                    <Icon name="delete" color="#cca199"></Icon>
+                    <TouchableOpacity onPress={() =>deleteProduct(item.id)}><Icon name="delete" color="#cca199"></Icon></TouchableOpacity>
                   </View>
                 </View>
               </ListItem.Content>

@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
   categories: {
     textAlign: "center",
     marginTop: "-20%",
+    marginBottom: "-10%",
     fontSize: 46,
     fontWeight: "bold",
     fontStyle: "italic",
@@ -201,8 +202,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingVertical: "5%",
     marginHorizontal: "10%",
-    marginVertical: "2%",
-    marginBottom: "5%",
+    marginVertical: "5%",
+    marginBottom: "1%",
     elevation: 5,
   },
 

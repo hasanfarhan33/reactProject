@@ -36,13 +36,13 @@ export default function AddCategory({ history }) {
  }
 
  handleID = (text) => {
-    this.setState({ id: text })
+    setState({ id: text });
  }
  handleName = (text) => {
-    this.setState({ name: text })
+    setState({ name: text });
  }
  handleDetails = (text) => {
-   this.setState({ description: text})
+   setState({ description: text});
  }
 
 addCategory = (categoryID, categoryDescription, categoryName) => {
@@ -66,21 +66,21 @@ addCategory = (categoryID, categoryDescription, categoryName) => {
             <TextInput style = {styles.input}
                placeholder = "Enter the ID..."
                autoCapitalize = "none"
-               onChangeText = {this.handleID}/>
+               onChangeText = {handleID}/>
             
             <TextInput style = {styles.input}
                placeholder = "Enter the category name..."
                autoCapitalize = "none"
-               onChangeText = {this.handleName}/>
+               onChangeText = {handleName}/>
 
             <TextInput style = {styles.input}
                placeholder = "Enter the category details..."
                autoCapitalize = "none"
-               onChangeText = {this.handleDetails}/>        
+               onChangeText = {handleDetails}/>        
 
             <TouchableOpacity
               style = {styles.submitButton}
-              onPress = {() => this.addCategory(this.state.id, this.state.description, this.state.name)}>
+              onPress = {() => addCategory(state.id, state.description, state.name)}>
               <View style = {styles.buttonContainer}>
                 <Text style = {styles.button}>Submit</Text>
               </View>
