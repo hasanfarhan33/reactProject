@@ -18,20 +18,20 @@ export default function Categories({ history }) {
     fetch("https://northwind.vercel.app/api/categories")
       .then((res) => res.json())
       .then((data) => {
-        setCategory(data);
-      });
+        setCategory(data)})
+      .catch((error) => {console.error(error)})
   }, []);
 
   useEffect(() => {
     if (idForDeletion!=0){
     fetch("https://northwind.vercel.app/api/categories/"+idForDeletion, { method: "DELETE" })
-        .then(() => ToastAndroid.show(("Delete request for category ID  "+idForDeletion+" has been sent."),ToastAndroid.SHORT));
+        .then(() => ToastAndroid.show(("Delete request for category ID  "+idForDeletion+" has been sent."),ToastAndroid.SHORT))
+        .catch((error) => {console.error(error)})
   }}, [idForDeletion]);
 
   return (
     <View style={styles.background}>
       <Text style={styles.categories}>Categories</Text>
-
       <View>
         <FlatList
         style = {{backgroundColor: "#F7B2AD", maxHeight: "80%", marginTop: "15%", marginHorizontal: "-5%"}}
@@ -52,7 +52,7 @@ export default function Categories({ history }) {
                     </ListItem.Subtitle>
                   </View>
                   <View style={styles.listButtons}>
-                    <TouchableOpacity onPress={() => setIdForDeletion(item.id)}><Icon name="edit" color = "#cca199"></Icon></TouchableOpacity>
+                    <TouchableOpacity onPress={() => {setIdForDeletion(item.id);history.push("/addcategory/"+item.id+"/"+item.description+"/"+item.name)}}><Icon name="edit" color = "#cca199"></Icon></TouchableOpacity>
                     <TouchableOpacity onPress={() => setIdForDeletion(item.id)}><Icon name="delete" color = "#cca199"></Icon></TouchableOpacity>
                   </View>
                 </View>

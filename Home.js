@@ -5,7 +5,6 @@ export default ({ history }) => (
   <View style={styles.background}>
     <Text style={styles.paragraph}>BAU Market</Text>
 
-    {/* Products Button is here */}
     <TouchableOpacity
       onPress={() => {
         history.push("/products");
@@ -16,7 +15,6 @@ export default ({ history }) => (
       </View>
     </TouchableOpacity>
 
-    {/* Categories Button is here */}
     <TouchableOpacity 
       onPress={() => {
         history.push("/categories");
@@ -27,7 +25,6 @@ export default ({ history }) => (
       </View>
     </TouchableOpacity>
 
-    {/* Orders Button is here */}
     <TouchableOpacity
       onPress={() => {
         history.push("/orders");
@@ -38,7 +35,6 @@ export default ({ history }) => (
       </View>
     </TouchableOpacity>
 
-    {/* About Button is here */}
     <TouchableOpacity
       onPress={() => {
         history.push("/about");
@@ -51,7 +47,6 @@ export default ({ history }) => (
   </View>
 );
 
-// Designing stuff here
 const styles = StyleSheet.create({
   background: {
     backgroundColor: "#F7B2AD",

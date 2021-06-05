@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,7 +11,6 @@ import {
 import { ListItem, Icon } from "react-native-elements";
 
 export default function Products({ history }) {
-  //Fetching the data from the api here
   const [products, setProducts] = useState([]);
   const [idForDeletion, setIdForDeletion] = useState(0);
 
@@ -19,15 +18,16 @@ export default function Products({ history }) {
     fetch("https://northwind.vercel.app/api/products")
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
-      });
+        setProducts(data)})
+      .catch((error) => {console.error(error)})  
   }, []);
 
 
   useEffect(() => {
     if (idForDeletion!=0){
       fetch("https://northwind.vercel.app/api/products/"+idForDeletion, { method: "DELETE" })
-          .then(() => ToastAndroid.show(("Delete request for product ID "+idForDeletion+" has been sent."),ToastAndroid.SHORT));
+          .then(() => ToastAndroid.show(("Delete request for product ID "+idForDeletion+" has been sent."),ToastAndroid.SHORT))
+          .catch((error) => {console.error(error)})
   }}, [idForDeletion]);
 
   return (
