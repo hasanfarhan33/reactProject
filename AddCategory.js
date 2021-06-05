@@ -2,13 +2,15 @@ import React, { useState, Component, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, TextInput} from "react-native";
 
 export default function AddCategory({ history }) {
-  const [id, setID] =useState(1);
-  const [name, setName] =useState(1);
-  const [description, setDescription] =useState(1);
+ 
+  // Replaced 1 with ""
+  const [id, setID] =useState("");
+  const [name, setName] =useState("");
+  const [description, setDescription] =useState("");
 
-  const [bid, bsetID] =useState(1);
-  const [bname, bsetName] =useState(1);
-  const [bdescription, bsetDescription] =useState(1);
+  const [bid, bsetID] =useState("");
+  const [bname, bsetName] =useState("");
+  const [bdescription, bsetDescription] =useState("");
 
   const handleButton = () => {
     bsetID(id);
@@ -31,21 +33,24 @@ export default function AddCategory({ history }) {
   return (
   <View style ={styles.background}>
     <Text style = {styles.categories}>Add new Category</Text>
-
-            <TextInput style = {styles.input}
-               placeholder = "Enter the ID..."
+            
+            <Text style = {styles.inputHeader}>Category ID</Text>
+            <TextInput style = {styles.inputStyle}
+               placeholder = "Enter category ID"
                autoCapitalize = "none"
                value= {id}
                onChange = {e => setID(e.target.value)}/>
-            
-            <TextInput style = {styles.input}
-               placeholder = "Enter the category name..."
+
+            <Text style = {styles.inputHeader}>Category Name</Text>          
+            <TextInput style = {styles.inputStyle}
+               placeholder = "Enter category name"
                autoCapitalize = "none"
                value= {name}
                onChange = {e => setName(e.target.value)}/>
 
-            <TextInput style = {styles.input}
-               placeholder = "Enter the category details..."
+            <Text style = {styles.inputHeader}>Category Description</Text>
+            <TextInput style = {styles.inputStyle}
+               placeholder = "Enter category description"
                autoCapitalize = "none"
                value= {description}
                onChange = {e => setDescription(e.target.value)}/>     
@@ -77,6 +82,21 @@ const styles = StyleSheet.create({
     paddingVertical: "5%",
     paddingHorizontal: "5%",
     flex: 1,
+  },
+
+  inputHeader: {
+    fontSize: 20, 
+    marginBottom: "-5%",
+    fontFamily: "Roboto",
+    fontWeight: "bold",
+    fontStyle: "italic",  
+  },
+
+  inputStyle: {
+    backgroundColor: "white", 
+    paddingVertical: "5%", 
+    borderRadius: 10, 
+    
   },
 
   container: {
