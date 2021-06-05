@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
   itemTitle: {
     color: "white",
     fontSize: 25,
-    // textAlign: "center",
     fontFamily: "Roboto",
     fontWeight: "bold",
     fontStyle: "italic",
@@ -143,7 +142,6 @@ const styles = StyleSheet.create({
 
   itemContainer: {
     flex: 1,
-    // backgroundColor: "red",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -157,23 +155,18 @@ const styles = StyleSheet.create({
 
   productBox: {
     flex: 1,
-    //  backgroundColor: "blue",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
 
   productInfo: {
-    // backgroundColor: "orange",
     flexDirection: "column",
     maxWidth: "80%",
   },
 
   iconList: {
-    // flex: 1,
     flexDirection: "row",
-    // flexWrap: "wrap",
-    // flexGrow: 0,
     backgroundColor: "green",
   },
 

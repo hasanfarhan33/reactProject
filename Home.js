@@ -59,10 +59,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     paddingVertical: 5,
     paddingHorizontal: 20,
-    // flex: 1,
   },
 
-  // Title
   paragraph: {
     marginTop: "-40%",
     fontSize: 46,
@@ -73,7 +71,6 @@ const styles = StyleSheet.create({
     marginBottom: "10%",
   },
 
-  // Products Button
   productsButtonContainer: {
     backgroundColor: "#333232",
     borderRadius: 50,
@@ -91,7 +88,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 
-  // Categories Button
   categoriesButtonContainer: {
     backgroundColor: "#333232",
     borderRadius: 50,
@@ -110,7 +106,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 
-  // Orders Button
   ordersButtonContainer: {
     backgroundColor: "#333232",
     borderRadius: 50,
@@ -128,7 +123,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 
-  // About Button
   aboutButtonContainer: {
     backgroundColor: "#333232",
     borderRadius: 50,

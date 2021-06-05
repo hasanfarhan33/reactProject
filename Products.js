@@ -25,9 +25,10 @@ export default function Products({ history }) {
 
 
   useEffect(() => {
+    if (idForDeletion!=0){
       fetch("https://northwind.vercel.app/api/products/"+idForDeletion, { method: "DELETE" })
-          .then(() => ToastAndroid.show(("Deletion of product "+idForDeletion+" is successful."),ToastAndroid.SHORT));
-  }, [idForDeletion]);
+          .then(() => ToastAndroid.show(("Delete request for product ID "+idForDeletion+" has been sent."),ToastAndroid.SHORT));
+  }}, [idForDeletion]);
 
   return (
     <View style={styles.background}>
@@ -75,7 +76,7 @@ export default function Products({ history }) {
                   </View>
 
                   <View styles={styles.iconList}>
-                    <TouchableOpacity onPress={e => setIdForDeletion(item.id)}><Icon name="delete" color="#cca199"></Icon></TouchableOpacity>
+                    <TouchableOpacity onPress={() => setIdForDeletion(item.id)}><Icon name="delete" color="#cca199"></Icon></TouchableOpacity>
                   </View>
                 </View>
               </ListItem.Content>
@@ -124,7 +125,6 @@ const styles = StyleSheet.create({
   itemTitle: {
     color: "white",
     fontSize: 25,
-    // textAlign: "center",
     fontFamily: "Roboto",
     fontWeight: "bold",
     fontStyle: "italic",
@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
 
   itemContainer: {
     flex: 1,
-    // backgroundColor: "red",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -146,23 +145,18 @@ const styles = StyleSheet.create({
 
   productBox: {
     flex: 1,
-    //  backgroundColor: "blue",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
 
   productInfo: {
-    // backgroundColor: "orange",
     flexDirection: "column",
     maxWidth: "80%",
   },
 
   iconList: {
-    // flex: 1,
     flexDirection: "row",
-    // flexWrap: "wrap",
-    // flexGrow: 0,
     backgroundColor: "green",
   },
 

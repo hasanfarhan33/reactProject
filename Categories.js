@@ -1,16 +1,18 @@
-import React, { useState, Component, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   FlatList,
+  ToastAndroid,
 } from "react-native";
 
 import { ListItem, Icon } from "react-native-elements";
 
 export default function Categories({ history }) {
   const [categories, setCategory] = useState([]);
+  const [idForDeletion, setIdForDeletion] = useState(0);
 
   useEffect(() => {
     fetch("https://northwind.vercel.app/api/categories")
@@ -19,6 +21,12 @@ export default function Categories({ history }) {
         setCategory(data);
       });
   }, []);
+
+  useEffect(() => {
+    if (idForDeletion!=0){
+    fetch("https://northwind.vercel.app/api/categories/"+idForDeletion, { method: "DELETE" })
+        .then(() => ToastAndroid.show(("Delete request for category ID  "+idForDeletion+" has been sent."),ToastAndroid.SHORT));
+  }}, [idForDeletion]);
 
   return (
     <View style={styles.background}>
@@ -44,14 +52,8 @@ export default function Categories({ history }) {
                     </ListItem.Subtitle>
                   </View>
                   <View style={styles.listButtons}>
-                    <Icon 
-                    name="edit"
-                    color = "#cca199"
-                    ></Icon>
-                    <Icon 
-                    name="delete"
-                    color = "#cca199"
-                    ></Icon>
+                    <TouchableOpacity onPress={() => setIdForDeletion(item.id)}><Icon name="edit" color = "#cca199"></Icon></TouchableOpacity>
+                    <TouchableOpacity onPress={() => setIdForDeletion(item.id)}><Icon name="delete" color = "#cca199"></Icon></TouchableOpacity>
                   </View>
                 </View>
               </ListItem.Content>
@@ -87,7 +89,6 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: "#F7B2AD",
     borderRadius: 10,
-    // backgroundColor: "blue",
     flexDirection: "column",
     justifyContent: "space-between",
     paddingVertical: "5%",
@@ -108,12 +109,7 @@ const styles = StyleSheet.create({
   },
 
   listButtons: {
-    // flex: 1,
     flexDirection: "row",
-    // flexWrap: "wrap",
-    // flexGrow: 0,
-    // backgroundColor: "green",
-     
   },
 
   itemTitle: {
@@ -135,26 +131,14 @@ const styles = StyleSheet.create({
     color: "black",
   },
 
-  listContainer: {
-    // flex: 1,
-    // flexDirection: "column",
-    // justifyContent: "space-between",
-    // marginTop: "-40%",
-    // maxHeight: 12,
-    // overflow: "scroll",
-    backgroundColor: "red",
-  },
-
   itemContainer: {
     flex: 1,
-    // backgroundColor: "red",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
 
   categoryName: {
-    // paddingRight: 20,
     color: "white", 
     fontWeight: "bold", 
     fontStyle: "italic", 
@@ -166,24 +150,19 @@ const styles = StyleSheet.create({
     color: "#e6e6e6", 
     fontSize: 15, 
     fontFamily: "Roboto",
-
   },
 
   categoryInfo: {
-    // backgroundColor: "orange",
     flexDirection: "column",
     maxWidth: "70%", 
   },
 
  categoryBox: {
    flex: 1, 
-  //  backgroundColor: "pink", 
    flexDirection: "row",
    justifyContent: "space-between",
-   alignItems:"center",   
-    
+   alignItems:"center",      
  },
-
 
   info: {
     textAlign: "center",
@@ -213,7 +192,6 @@ const styles = StyleSheet.create({
   },
 
   categoryListContainer: {
-    // color: "pink",
     paddingTop: "10%",
   },
 });
