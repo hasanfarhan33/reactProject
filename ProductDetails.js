@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,7 +7,7 @@ import {
   FlatList,
 } from "react-native";
 
-import { ListItem, Icon } from "react-native-elements";
+import { ListItem} from "react-native-elements";
 
 export default function ProductDetails({ history, match }) {
   let url="https://northwind.vercel.app/api/products/";
@@ -16,20 +16,18 @@ export default function ProductDetails({ history, match }) {
   prodID=prodID.replace('"','');
   let productURL=url.concat(prodID);
 
-  //Fetching the data from the api here
   const [product, setProduct] = useState([]);
   useEffect(() => {
     fetch(productURL)
       .then((res) => res.json())
       .then((data) => {
-        setProduct([data]);
-      });
+        setProduct([data])})
+      .catch((error) => {console.error(error)})  
   }, []);
 
   return (
     <View style={styles.background}>
     <Text style={styles.product}>Product Details</Text>
-
     <View>
       <FlatList
         style={{
@@ -135,7 +133,6 @@ const styles = StyleSheet.create({
   itemTitle: {
     color: "white",
     fontSize: 25,
-    // textAlign: "center",
     fontFamily: "Roboto",
     fontWeight: "bold",
     fontStyle: "italic",
@@ -143,7 +140,6 @@ const styles = StyleSheet.create({
 
   itemContainer: {
     flex: 1,
-    // backgroundColor: "red",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -157,23 +153,18 @@ const styles = StyleSheet.create({
 
   productBox: {
     flex: 1,
-    //  backgroundColor: "blue",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
 
   productInfo: {
-    // backgroundColor: "orange",
     flexDirection: "column",
     maxWidth: "80%",
   },
 
   iconList: {
-    // flex: 1,
     flexDirection: "row",
-    // flexWrap: "wrap",
-    // flexGrow: 0,
     backgroundColor: "green",
   },
 

@@ -10,8 +10,8 @@ export default function Orders({ history }) {
     fetch("https://northwind.vercel.app/api/orders")
       .then((res) => res.json())
       .then((data) => {
-        setOrders(data);
-      });
+        setOrders(data)})
+      .catch((error) => {console.error(error)})  
   }, []);
 
   return (
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
   },
 
   orderName: {
-     // paddingRight: 20,
      color: "white", 
      fontWeight: "bold", 
      fontStyle: "italic", 
@@ -131,5 +130,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontStyle: "italic",
   },
-
 });

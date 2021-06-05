@@ -12,8 +12,6 @@ import AddCategory from "./AddCategory";
 import Orders from "./Orders";
 
 export default class App extends Component {
-
-
   render() {
     return (
       <NativeRouter>
@@ -25,7 +23,7 @@ export default class App extends Component {
             <Route exact path="/productdetails/:id" component={ProductDetails}></Route>
             <Route exact path="/orders" component={Orders}></Route>
             <Route exact path="/categories" component={Categories}></Route>
-            <Route exact path="/addcategory" component={AddCategory}></Route>
+            <Route exact path="/addcategory/:cid?/:cdesc?/:cname?" component={AddCategory}></Route>
           </Switch>
         </View>
       </NativeRouter>
@@ -33,7 +31,6 @@ export default class App extends Component {
   }
 }
 
-// Design stuff here
 const styles = StyleSheet.create({
   background: {
     backgroundColor: "#F7B2AD",
